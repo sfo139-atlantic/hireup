@@ -5,25 +5,16 @@ import { DropDownMenu } from '../components/DropDownMenu.jsx';
 const exploreContainer = `
   flex
   flex-col
-  border-solid
-  border-2
-  border-black
   justifiy-start
 `;
 const sortAndFilter = `
   flex
   flex-row
-  border-solid
-  border-2
-  border-black
 `;
 
 const exploreGallery =`
   flex
   flex-row
-  border-solid
-  border-2
-  border-black
 `
 const Explore = () => {
   const [usersData, setUserData] = useState([]);
@@ -38,7 +29,7 @@ const Explore = () => {
         <DropDownMenu name={'Hourly Rate'} options={['Highest to Lowest', 'Lowest to Highest']} clickHandler={setSort} />
         <DropDownMenu name={'Time Zone'} options={['PST', 'MST', 'CST', 'EST', 'Outside of U.S.']} clickHandler={setTimezone} />
       </div>
-      <div className={exploreGallery}>Pictures</div>
+      <div className={exploreGallery}></div>
     </div>
   )
 };
