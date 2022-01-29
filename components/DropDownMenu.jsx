@@ -1,6 +1,6 @@
 import React from 'react';
 
-const selectName =`
+const selectName = `
   bg-white
   text-black
   font-semibold

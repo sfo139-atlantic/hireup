@@ -17,7 +17,7 @@ const exploreGallery =`
   flex-row
 `
 const Explore = () => {
-  const [usersData, setUserData] = useState([]);
+  const [usersData, setUsersData] = useState([]);
   const [specialty, setSpecialty] = useState('');
   const [sort, setSort] = useState('');
   const [timezone, setTimezone] = useState('');
