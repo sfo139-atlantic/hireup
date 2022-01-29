@@ -17,27 +17,6 @@ const dropDownMenu = `
   text-gray-700
   pt-1
 `;
-
-const firstOption = `
-  rounded-t
-  bg-white
-  hover:text-green
-  py-2
-  px-4
-  block
-  whitespace-no-wrap
-  cursor-pointer
-`;
-const lastOption = `
-  rounded-b
-  bg-white
-  hover:text-green
-  py-2
-  px-4
-  block
-  whitespace-no-wrap
-  cursor-pointer
-`;
 const option = `
   bg-white
   hover:text-green
@@ -47,7 +26,14 @@ const option = `
   whitespace-no-wrap
   cursor-pointer
 `;
-
+const firstOption = `
+  rounded-t
+ ${option}
+`;
+const lastOption = `
+  rounded-b
+  ${option}
+`;
 export const DropDownMenu = ({ name, options }) => {
   return (
     <div className="p-10">
