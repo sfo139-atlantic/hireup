@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+a * {
+  pointer-events: none;
+}
+
 .dropdown:hover .dropdown-menu {
   display: block;
 }

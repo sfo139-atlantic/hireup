@@ -2,7 +2,7 @@ import React from 'react';
 
 const selectName =`
   bg-white
-  text-gray-700
+  text-black
   font-semibold
   py-2 px-4
   rounded
@@ -10,7 +10,6 @@ const selectName =`
   items-center
   cursor-pointer
 `;
-
 const dropDownMenu = `
   dropdown-menu
   absolute hidden
@@ -28,13 +27,13 @@ const option = `
 `;
 const firstOption = `
   rounded-t
- ${option}
+  ${option}
 `;
 const lastOption = `
   rounded-b
   ${option}
 `;
-export const DropDownMenu = ({ name, options }) => {
+export const DropDownMenu = ({ name, options, clickHandler }) => {
   return (
     <div className="p-10">
       <div className="dropdown inline-block relative">
@@ -50,16 +49,16 @@ export const DropDownMenu = ({ name, options }) => {
           {options.map((element, index) => {
             if (index === 0) {
               return (
-                <li key={index}><a className={firstOption}>{element}</a></li>
+                <li key={index} ><a className={firstOption} id={element} onClick={() => clickHandler(event.target.id)} >{element}</a></li>
               )
             }
             if (index === options.length -1) {
               return (
-                <li key={index}><a className={lastOption}>{element}</a></li>
+                <li key={index}><a className={lastOption} id={element} onClick={() => clickHandler(event.target.id)} >{element}</a></li>
               )
             }
             return (
-              <li key={index}><a className={option}>{element}</a></li>
+              <li key={index}><a className={option} id={element} onClick={() => clickHandler(event.target.id)} >{element}</a></li>
             )
           })}
         </ul>
