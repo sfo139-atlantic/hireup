@@ -11,6 +11,13 @@ const selectName =`
   cursor-pointer
 `;
 
+const dropDownMenu = `
+  dropdown-menu
+  absolute hidden
+  text-gray-700
+  pt-1
+`;
+
 const firstOption = `
   rounded-t
   bg-white
@@ -53,7 +60,7 @@ export const DropDownMenu = ({ name, options }) => {
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
           </svg>
         </button>
-        <ul className="dropdown-menu absolute hidden text-gray-700 pt-1">
+        <ul className={dropDownMenu}>
           {options.map((element, index) => {
             if (index === 0) {
               return (
