@@ -39,7 +39,7 @@ const lastOption = `
   cursor-pointer
 `;
 const option = `
-  bg-white-200
+  bg-white
   hover:text-green
   py-2
   px-4
