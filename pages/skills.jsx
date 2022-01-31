@@ -81,6 +81,8 @@ const checkBoxStyling = `
 
 export default function skills () {
   const [userData, setData] = useState();
+
+  // Need to replace these with useRef hook
   const [userName, setName] = useState('');
   const [projectManagerCheck, setPMCheck] = useState(false);
   const [engineerCheck, setEngineerCheck] = useState(false);
@@ -107,7 +109,6 @@ export default function skills () {
         <form className={topHalfForm}>
           <input className={shortInput} type='text' name='name' value={userName} placeholder='Name' required></input>
           <input className={longInput} type='text' name='portfolio' value='' placeholder='Portfolio / Work Example' required></input>
-          <label className={labelStyling}></label>
           <input className={longInput} type='text' name='portfolio' value='' placeholder='Education' required></input>
         </form>
       </div>
