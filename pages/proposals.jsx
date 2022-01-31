@@ -1,5 +1,8 @@
-import ProposalForm from '../../components/ProposalForm.jsx'
-import Sidebar from '../../components/ProposalSideBar.jsx'
+
+
+import ProposalForm from '../components/ProposalForm.jsx'
+import Sidebar from '../components/ProposalSideBar.jsx'
+import Navbar from '../components/Navbar.jsx'
 import React, { useState, useEffect } from 'react'
 
 const fakeProposals = [
@@ -58,7 +61,7 @@ export default function Proposal() {
 
   return (
     <div class="grid grid-cols-5 gap-4">
-      <div class="col-span-5 bg-green-500 py-5 text-center"> nav</div>
+      <div class="col-span-5 text-center"><Navbar /></div>
       <div class="row-span-3">
         <Sidebar currProposal={currProposal} switchProposal={switchProposal} allProposals={fakeProposals} />
       </div>
@@ -69,4 +72,3 @@ export default function Proposal() {
     </div>
   )
 }
-
