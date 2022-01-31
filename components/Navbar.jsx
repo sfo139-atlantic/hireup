@@ -1,7 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import {aLinkGreen, aLinkGrey} from '../styles/styles';
 
 const navigation = [
   { name: 'Explore', href: 'explore', current: false },
@@ -62,14 +63,14 @@ const Navbar = () => {
                         href={item.href}
                         className={classNames(
                           item.current ? 'text-green' : 'text-grey hover:text-green',
-                          'px-3 py-2 rounded-md text-sm font-semibold'
+                          `${aLinkGrey}`
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
                       </a>
                     ))}
-                <a key="Join" href="#" className="px-3 py-2 rounded-xl text-lg font-semibold text-green border border-green hover:text-white hover:bg-green">Join</a>
+                <a key="Join" href="signup" className={aLinkGreen}>Join</a>
                 {/* Profile dropdown */}
                 {/* <Menu as="div" className="ml-3 relative">
                   <div>

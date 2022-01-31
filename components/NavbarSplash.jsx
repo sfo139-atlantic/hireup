@@ -63,14 +63,14 @@ const Navbar = () => {
                         href={item.href}
                         className={classNames(
                           item.current ? 'text-green' : 'text-white hover:text-green',
-                          'px-3 py-2 rounded-md text-sm font-semibold'
+                          'px-4 py-1 rounded-md text-sm font-semibold'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
                       </a>
                     ))}
-                <a key="Join" href="#" className="px-3 py-2 rounded-xl text-lg font-semibold text-green border border-green hover:text-white hover:bg-green">Join</a>
+                <a key="Join" href="#" className="px-4 py-1 rounded-xl text-sm font-semibold text-green border border-green hover:text-white hover:bg-green">Join</a>
                 {/* Profile dropdown */}
                 {/* <Menu as="div" className="ml-3 relative">
                   <div>
