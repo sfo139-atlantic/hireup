@@ -8,11 +8,11 @@ client.connect()
   .catch(console.error);
 
   const db = client.db('hireup');
-  const chats = db.collection('chats');
+  const messages = db.collection('messages');
   const profiles = db.collection('profiles');
 
   module.exports = {
     db: db,
-    chats: chats,
+    messages: messages,
     profiles: profiles,
   };
