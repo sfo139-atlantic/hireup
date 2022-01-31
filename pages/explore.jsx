@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
 
 import { DropDownMenu } from '../components/DropDownMenu.jsx';
 
@@ -23,6 +24,8 @@ const Explore = () => {
   const [timezone, setTimezone] = useState('');
 
   return (
+    <>
+    <Navbar/>
     <div className={exploreContainer}>
       <div className={sortAndFilter}>
         <DropDownMenu name={'Specialty'} options={['Production Manager', 'Software Engineer', 'Designer']} clickHandler={setSpecialty} />
@@ -33,6 +36,7 @@ const Explore = () => {
         
       </div>
     </div>
+    </>
   )
 };
 
