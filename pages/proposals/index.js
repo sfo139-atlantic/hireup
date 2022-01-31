@@ -7,7 +7,7 @@ const fakeProposals = [
     id:1,
     headline: 'HireUp1',
     overview: 'Bridging the gap between business entrepreneurs and digital product development experts by connect clients and their business ideas to product development specialists through an online marketplace.',
-    skills: 'React Native, Project Management',
+    skills: ['React Native', 'Project Management'],
     timeline: '1/11/2021 - 1/11/2022',
     location: 'San Francisco, CA',
     budget: '100'
@@ -16,7 +16,7 @@ const fakeProposals = [
     id:2,
     headline: 'HireUp2',
     overview: 'Bridging the gap between business entrepreneurs and digital product development experts by connect clients and their business ideas to product development specialists through an online marketplace.',
-    skillsRequired: 'React Native, Project Management',
+    skills: ['UI Design', 'Project Management'],
     timeline: '1/11/2021 - 1/11/2022',
     location: 'Seatle, CA',
     budget: '100'
@@ -25,7 +25,7 @@ const fakeProposals = [
     id:3,
     headline: 'HireUp3',
     overview: 'Bridging the gap between business entrepreneurs and digital product development experts by connect clients and their business ideas to product development specialists through an online marketplace.',
-    skills: 'React Native, Project Management',
+    skills: ['React Native', 'Project Management'],
     timeline: '1/11/2021 - 1/11/2022',
     location: 'Davis, CA',
     budget: '100'
@@ -57,6 +57,7 @@ export default function Proposal() {
         <Sidebar currProposal={currProposal} switchProposal={switchProposal} allProposals={fakeProposals} />
       </div>
       <div class="col-span-3">
+
         <ProposalForm currProposal={currProposal} updateProposal={updateProposal} addProposal={addProposal} />
       </div>
     </div>

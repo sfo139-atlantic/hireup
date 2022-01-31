@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import MultiSelect from './MultiSelect.jsx';
+
+
 
 export default function ProposalForm(props) {
   const [headline, setHeadline] = useState(props.currProposal.headline)
@@ -17,8 +20,8 @@ export default function ProposalForm(props) {
     setBudget(props.currProposal.budget)
   }, [props.currProposal])
 
-  const handleChange = (e) => {
-    const idToSetState = {
+  const handleChange = (type, value) => {
+    const typeToSetState = {
       'headline' : setHeadline,
       'overview' : setOverview,
       'skills' : setSkills,
@@ -26,7 +29,7 @@ export default function ProposalForm(props) {
       'location' : setLocation,
       'budget' : setBudget
     }
-    idToSetState[e.target.id](e.target.value)
+    typeToSetState[type](value)
   }
 
   const handleSubmit = (e) => {
@@ -54,6 +57,7 @@ export default function ProposalForm(props) {
     }
   }
 
+
   return (
     <div class="col-span-3 px-4">
         <div class="text-center text-4xl py-6">
@@ -64,43 +68,39 @@ export default function ProposalForm(props) {
           <label class="block text-gray-700 text-sm font-bold mb-2" for="headline">
             Headline
           </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="headline" type="text" placeholder="Headline" value={headline} onChange={handleChange}/>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="headline" type="text" placeholder="Headline" value={headline} onChange={(e) => handleChange('headline', e.target.value)}/>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="overview">
             Project Overview
           </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline break-words" id="overview" type="text" placeholder="Project Overview" value={overview} onChange={handleChange} />
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline break-words" id="overview" type="text" placeholder="Project Overview" value={overview} onChange={(e) => handleChange('overview', e.target.value)} />
         </div>
+
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="skills">
-            Skills Required
-          </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="skills" type="text" placeholder="Skills Required" value={skills} onChange={handleChange} />
+          <MultiSelect  id={props.currProposal.id} skills={props.currProposal.skills} handleChange={handleChange}/>
         </div>
+
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="timeline">
             Estimated Timeline
           </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="timeline" type="text" placeholder="Estimated Timeline" value={timeline} onChange={handleChange} />
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="timeline" type="text" placeholder="Estimated Timeline" value={timeline} onChange={(e) => handleChange('timeline', e.target.value)} />
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="location">
             Location Preference
           </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Location Preference" value={location} onChange={handleChange} />
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="location" type="text" placeholder="Location Preference" value={location} onChange={(e) => handleChange('location', e.target.value)} />
         </div>
         <div class="mb-6">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="budget">
             Budget
           </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="budget" type="text" placeholder="Budget" value={budget} onChange={handleChange} />
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="budget" type="text" placeholder="Budget" value={budget} onChange={(e) => handleChange('budget', e.target.value)} />
         </div>
         <div class="flex items-end">
-          {/* <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" type="button">
-            Update
-          </button> */}
-          <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
+          <button class="transition ease-in-out delay-100 bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
             {props.currProposal.id === "New" ? "Publish" : "Update"}
           </button>
         </div>
