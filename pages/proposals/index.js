@@ -8,8 +8,10 @@ const fakeProposals = [
     headline: 'HireUp1',
     overview: 'Bridging the gap between business entrepreneurs and digital product development experts by connect clients and their business ideas to product development specialists through an online marketplace.',
     skills: ['React Native', 'Project Management'],
-    timeline: '1/11/2021 - 1/11/2022',
+    start: 1603596550705,
+    end: 1643596550705,
     location: 'San Francisco, CA',
+    timezone: ['Pacific'],
     budget: '100'
   },
   {
@@ -17,8 +19,10 @@ const fakeProposals = [
     headline: 'HireUp2',
     overview: 'Bridging the gap between business entrepreneurs and digital product development experts by connect clients and their business ideas to product development specialists through an online marketplace.',
     skills: ['UI Design', 'Project Management'],
-    timeline: '1/11/2021 - 1/11/2022',
+    start: 1643596550705,
+    end: 1643596550705,
     location: 'Seatle, CA',
+    timezone: ['Pacific'],
     budget: '100'
   },
   {
@@ -26,8 +30,10 @@ const fakeProposals = [
     headline: 'HireUp3',
     overview: 'Bridging the gap between business entrepreneurs and digital product development experts by connect clients and their business ideas to product development specialists through an online marketplace.',
     skills: ['React Native', 'Project Management'],
-    timeline: '1/11/2021 - 1/11/2022',
+    start: 1643596550705,
+    end: 1643596550705,
     location: 'Davis, CA',
+    timezone: ['Pacific'],
     budget: '100'
   },
 ]
