@@ -29,7 +29,9 @@ const Explore = () => {
         <DropDownMenu name={'Hourly Rate'} options={['Highest to Lowest', 'Lowest to Highest']} clickHandler={setSort} />
         <DropDownMenu name={'Time Zone'} options={['PST', 'MST', 'CST', 'EST', 'Outside of U.S.']} clickHandler={setTimezone} />
       </div>
-      <div className={exploreGallery}></div>
+      <div className={exploreGallery}>
+        
+      </div>
     </div>
   )
 };
