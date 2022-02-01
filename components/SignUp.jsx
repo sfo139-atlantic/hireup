@@ -8,7 +8,6 @@ const SignUp = () => {
   const [currentuser, setCurrentUser] = useState()
 
   useEffect(()=> {
-    console.log(alertPrompt)
   },[alertPrompt])
 
   const handleSubmit = (e) => {
