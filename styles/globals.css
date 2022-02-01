@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-family: 'Open Sans', Arial, sans-serif;
+  letter-spacing: 0.02rem;
+}
+
 a * {
   pointer-events: none;
 }
@@ -9,3 +14,4 @@ a * {
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+

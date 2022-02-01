@@ -35,7 +35,7 @@ const lastOption = `
 `;
 export const DropDownMenu = ({ name, options, clickHandler }) => {
   return (
-    <div className="p-10">
+    <div className="py-5 pl-1 mr-5">
       <div className="dropdown inline-block relative">
         <button className={selectName}>
           <span className="mr-1">
