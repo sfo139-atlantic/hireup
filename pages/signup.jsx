@@ -1,3 +1,4 @@
-export default function SignUp() {
-  return <h1 style={{textAlign: 'center', fontSize: '3rem'}}> Sign Up...</h1>
+import SignUp from "../Components/SignUp.jsx"
+export default function SignUpPage() {
+  return <SignUp/>
 }
