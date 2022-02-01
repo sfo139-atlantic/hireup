@@ -73,14 +73,12 @@ const Explore = () => {
   useEffect(() => {
     axios.get('http://localhost:3001/profiles')
       .then((results) => {
-        console.log(results.data)
         let userProfiles = [];
         if (specialty === '' && timezone === '') {
           userProfiles = results.data;
         }
         if (specialty !== '') {
           results.data.forEach((user) => {
-            console.log(specialty, user.freelancer)
             if (user.freelancer[specialty] === true) {
               userProfiles.push(user);
             }
@@ -102,7 +100,7 @@ const Explore = () => {
         setUsersData(userProfiles);
       })
       .catch((err) => {
-        console.log(err)
+        throw err
       })
   }, [specialty, sort, timezone]);
   return (
@@ -112,21 +110,15 @@ const Explore = () => {
         <div className={sortAndFilter}>
           <DropDownMenu name={'Specialty'} options={['Production Manager', 'Software Engineer', 'Designer']} clickHandler={setSpecialty} />
           <DropDownMenu name={'Hourly Rate'} options={['Highest to Lowest', 'Lowest to Highest']} clickHandler={setSort} />
-          <DropDownMenu name={'Time Zone'} options={['PST', 'MST', 'CST', 'EST', 'Outside of U.S.']} clickHandler={setTimezone} />
+          <DropDownMenu name={'Time Zone'} options={['Pacific', 'Mountain', 'Central', 'Eastern', 'Outside of U.S.']} clickHandler={setTimezone} />
         </div>
         <div className={exploreGallery}>
           {usersData.map((user) => {
             const titles = Object.entries(user.freelancer);
             const userTitles = [];
             for (let i = 0; i < titles.length; i++) {
-              if (titles[i][0] === 'pm' && titles[i][1]) {
-                userTitles.push('Product Manager');
-              }
-              if (titles[i][0] === 'engineer' && titles[i][1]) {
-                userTitles.push('Software Engineer');
-              }
-              if (titles[i][0] === 'designer' && titles[i][1]) {
-                userTitles.push('Designer');
+              if (titles[i][0] === specialty && titles[i][1]) {
+                userTitles.push(specialty);
               }
             }
             const userTitleString =userTitles.join(', ');
