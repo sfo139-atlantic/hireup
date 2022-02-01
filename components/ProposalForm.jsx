@@ -140,7 +140,7 @@ export default function ProposalForm(props) {
           </div>
         </div>
         <div class="flex items-end">
-          <button class="transition ease-in-out delay-100 bg-transparent border border-green-500 text-green-500 hover:bg-green-500 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
+          <button class="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
             {props.currProposal.id === "New" ? "Publish" : "Update"}
           </button>
         </div>
