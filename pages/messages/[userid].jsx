@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { io } from 'socket.io-client';
 import axios from 'axios';
 import MessageBox from '../../components/messages/MessageBox.jsx'
+import Navbar from '../components/Navbar.jsx'
 
 
 const MessagesList = () =>{
