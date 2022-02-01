@@ -36,5 +36,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-*privateKey.json
+
 *config.js
+*.package-lock.json
+
+notes.txt
