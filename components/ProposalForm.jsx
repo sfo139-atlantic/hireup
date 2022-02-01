@@ -134,11 +134,16 @@ export default function ProposalForm(props) {
           <label class="block text-gray-700 text-sm font-bold mb-2" for="budget">
             Budget
           </label>
-          <div class="flex flex-row items-center">
-            <div class="text-gray-700 text-sm font-bold shadow appearance-none border border-r-0 rounded-l bg-slate-200 w-min py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline">$</div>
-            <input class="shadow appearance-none border border-l-0 rounded-r w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="budget" type="text" placeholder="Ex. 1000" value={budget} onChange={(e) => handleChange('budget', e.target.value)} />
+          <div class="relative flex w-full flex-wrap items-stretch mb-3">
+            <span class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </span>
+            <input type="text" placeholder="Placeholder" class="px-3 py-1.5 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-md border border-blueGray-300 outline-none focus:outline-none focus:ring w-full pl-10" id="budget" placeholder="Ex. 1000" value={budget} onChange={(e) => handleChange('budget', e.target.value)}/>
           </div>
         </div>
+
         <div class="flex items-end">
           <button class="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
             {props.currProposal.id === "New" ? "Publish" : "Update"}
