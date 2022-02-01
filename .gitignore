@@ -38,6 +38,6 @@ yarn-error.log*
 
 
 *config.js
-*.package-lock.json
+*package-lock.json
 
 notes.txt
