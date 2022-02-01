@@ -8,17 +8,21 @@ export default function ProposalForm(props) {
       {props.allProposals.map(proposal => (
         <div
           key={proposal.id}
-          class={proposal.id === props.currProposal.id ? "text-green" : ""}
+          class={proposal.id === props.currProposal.id ? "text-white border-2 bg-green rounded-lg font-bold" : ""}
           onClick={() => props.switchProposal(proposal)}>
-          {proposal.headline}
+          <div class="pl-2">
+            {proposal.headline}
+          </div>
         </div>
       )
       )}
         <div
           onClick={() => props.switchProposal({id: "New", headline: "", overview: "", skills: "", timeline: "", location: "", budget: "", timezone:""})}
-          class={props.currProposal.id === 'New' ? "text-green" : ""}
+          class={props.currProposal.id === 'New' ? "text-white border-2 bg-green rounded-lg font-bold" : ""}
         >
-          Add New Proposal
+          <div class="pl-2">
+            Add New Proposal
+          </div>
         </div>
     </div>
   )

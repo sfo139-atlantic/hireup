@@ -135,8 +135,8 @@ export default function ProposalForm(props) {
             Budget
           </label>
           <div class="flex flex-row items-center">
-            <div class="text-gray-700 text-sm font-bold shadow appearance-none border border-r-0 rounded bg-slate-200 w-min py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">$</div>
-            <input class="shadow appearance-none border border-l-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="budget" type="text" placeholder="Ex. 1000" value={budget} onChange={(e) => handleChange('budget', e.target.value)} />
+            <div class="text-gray-700 text-sm font-bold shadow appearance-none border border-r-0 rounded-l bg-slate-200 w-min py-2 px-3 text-gray leading-tight focus:outline-none focus:shadow-outline">$</div>
+            <input class="shadow appearance-none border border-l-0 rounded-r w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="budget" type="text" placeholder="Ex. 1000" value={budget} onChange={(e) => handleChange('budget', e.target.value)} />
           </div>
         </div>
         <div class="flex items-end">
