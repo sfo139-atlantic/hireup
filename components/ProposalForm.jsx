@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MultiSelect from './ProposalMultiSelect.jsx';
+import MultiSelect from './MultiSelect.jsx';
 import DatePicker from './ProposalDatePicker.jsx';
 
 
