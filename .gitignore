@@ -37,4 +37,7 @@ yarn-error.log*
 *.tsbuildinfo
 
 
+*config.js
+*package-lock.json
+
 notes.txt
