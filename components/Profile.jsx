@@ -56,6 +56,9 @@ const Profile = () => {
             {fakeData.work_history}
           </p>
         </div>
+        <a href="/" class="px-4 py-2 pb-4 hover:bg-gray-100 flex" onClick={()=>logout()}>
+          <p class="text-sm font-medium text-gray-800 leading-none">Logout</p>
+        </a>
       </div>
       <div className="felx flex-col justify-center">
         <div>
