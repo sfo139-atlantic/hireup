@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar.jsx'
-import Carousel from './Carousel.jsx'
+// import Carousel from './Carousel.jsx'
 import { auth, logout } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -34,27 +34,41 @@ const Profile = () => {
       <div className="col-span-5 text-center"><Navbar /></div>
       <div className="col-span-3">
         <div className="px-5">
-          <Carousel portfolio={fakeData.portfolio}/>
+          {/* <Carousel portfolio={fakeData.portfolio}/> */}
         </div>
         <div className="px-5">
-          <h1>
+          <h1 className='my-2'>
+            Educations:
+          </h1>
+          <p className='my-2'>
+            {fakeData.education}
+          </p>
+          <h1 className='my-2'>
             Description:
           </h1>
-          <p>
+          <p className='my-2'>
             {fakeData.skills}
+          </p>
+          <h1 className='my-2'>
+            Work History:
+          </h1>
+          <p className='my-2'>
+            {fakeData.work_history}
           </p>
         </div>
       </div>
-      <div className="row-span-4 border">
-        <img className='shrink-0 grow-0 w-full h-2/5 rounded-md' src={typeof fakeData.profile_pic === 'string' ? fakeData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
-        <div className='text-center'>
+      <div className="felx flex-col justify-center">
+        <div>
+          <img className='shrink-0 grow-0 rounded-full' src={typeof fakeData.profile_pic === 'string' ? fakeData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
+        </div>
+        <div className='text-center my-2'>
           Name: {`${fakeData.firstName} ${fakeData.lastName}`}
         </div>
-        <div>
-
+        <div className='text-center my-2'>
+          Hourlysdjfsjfsj: ${fakeData.rate.$numberDecimal}
         </div>
-        <div className='text-center'>
-          Hourly: ${fakeData.rate.$numberDecimal}
+        <div className='flex justify-center'>
+          <button className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-2">Contact</button>
         </div>
       </div>
     </div>
