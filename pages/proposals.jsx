@@ -1,7 +1,7 @@
 
 
 import ProposalForm from '../components/ProposalForm.jsx'
-import Sidebar from '../components/ProposalSideBar.jsx'
+import Sidebar from '../components/ProposalSidebar.jsx'
 import Navbar from '../components/Navbar.jsx'
 import React, { useState, useEffect } from 'react'
 

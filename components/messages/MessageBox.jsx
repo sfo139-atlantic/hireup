@@ -8,11 +8,6 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
   const messageInput = useRef();
   const [messages, setMessages] = useState(message.messages)
 
-  // const messageHandler = (message) => {
-  //   console.log(messages)
-  //   setMessages([...messages, message])
-  // }
-
   useEffect(()=>{
     socket.emit('connect-verify-call', 'Checking Connection')
     socket.on('connect-verify-response', data => {
@@ -23,11 +18,8 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
     }
     socket.emit('handshake', userid);
     socket.on('chat-message', data => {
-      console.log(data)
-      console.log(messages)
       setMessages((prev)=>[...prev, data])
     })
-    // return(socket.off('chat-message'))
   }, [])
 
 
@@ -43,14 +35,29 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
     messageInput.current.value = '';
   }
   return (
-    <div>
-      {connectionStatus ? <div>Status: Connected</div> : <div> Status: Disconnected</div>}
-      <form onSubmit={messageSubmitHandler}>
-        <input type='text' ref={messageInput}></input>
-        <button>Send</button>
+    <div className="">
+      <div className="relative w-[100%] p-6 overflow-y-auto h-[80vh]">
+        {/* {connectionStatus ? <div>Status: Connected</div> : <div> Status: Disconnected</div>} */}
+        {messages.map(message => {return message.user == sendTo ?
+        <div className=" flex justify-start " >
+          <div className="relative max-w-xl text-white bg-green rounded-lg shadow p-1 m-1 w-auto">
+          {message.message}
+          </div>
+        </div>
+        :
+        <div className="flex justify-end">
+          <div className="relative max-w-xl text-black bg-white rounded-lg shadow p-1 m-1 w-auto">
+            {message.message}
+          </div>
+        </div>
+          })}
+      </div>
+      <form onSubmit={messageSubmitHandler} >
+        <input type='text' ref={messageInput} className="w-{90%}"></input>
+        <button>
+          Send
+        </button>
       </form>
-      {messages.map(message => {return message.user == sendTo ? <div style={{ border: "2px solid black", margin: "15px"}}>{selectedUsername}: {message.message}</div> : <div style={{ border: "2px solid black", margin: "15px"}}>Me: {message.message}</div>
-        })}
     </div>
   )
 }
