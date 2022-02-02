@@ -1,4 +1,9 @@
 
+import axios from 'axios';
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, logout } from "../src/firebase";
+import Router from 'next/router'
+
 
 import ProposalForm from '../components/ProposalForm.jsx'
 import Sidebar from '../components/ProposalSideBar.jsx'
@@ -41,7 +46,8 @@ const fakeProposals = [
   },
 ]
 
-export default function Proposal() {
+
+const Proposal = ({ user }) => {
   const [currProposal, setCurrProposal] = useState(fakeProposals[0])
 
   const switchProposal = (proposal) => {
@@ -71,4 +77,27 @@ export default function Proposal() {
       </div>
     </div>
   )
+}
+
+export default function ProposalCheckLogin() {
+  const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      return Router.push('/login')
+    }
+  }, [user, loading])
+
+  if (loading) {
+    return (
+      <div>Loading</div>
+    )
+  }
+
+  if (user) {
+    return <Proposal user={user} />
+  } else {
+    return null
+  }
+
 }

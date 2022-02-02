@@ -1,6 +1,10 @@
 import SkillsForm from '../components/SkillsForm.jsx'
 import Navbar from '../components/Navbar.jsx'
 import React, { useState, useEffect } from 'react'
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, logout } from "../src/firebase";
+import Router from 'next/router'
+
 
 const fakeProfile = {
   _id: 1,
@@ -34,7 +38,7 @@ const fakeProfile = {
   timezones: ["Pacific", "Mountain"]
 }
 
-export default function Proposal() {
+const Skills = ({ user }) => {
   const [currProfile, setCurrentProfile] = useState(fakeProfile)
 
 
@@ -48,4 +52,27 @@ export default function Proposal() {
       </div>
     </div>
   )
+}
+
+export default function SkillsCheckLogin() {
+  const [user, loading, error] = useAuthState(auth);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      return Router.push('/login')
+    }
+  }, [user, loading])
+
+  if (loading) {
+    return (
+      <div>Loading</div>
+    )
+  }
+
+  if (user) {
+    return <Skills user={user} />
+  } else {
+    return null
+  }
+
 }
