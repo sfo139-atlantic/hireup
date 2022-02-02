@@ -59,11 +59,11 @@ io.on('connection', socket => {
     console.log(message)
     db.messages.updateOne({
       users: {
-        $all: [parseInt(message.sendTo), parseInt(message.sendFrom)]
+        $all: [message.sendTo, message.sendFrom]
       }
     }, {
       $push: {
-        messages: {user: parseInt(message.sendFrom), time: Date.now(), message: message.message}
+        messages: {user: message.sendFrom, time: Date.now(), message: message.message}
       }}).catch((e)=>console.log(e))
     socket.emit('chat-message', message);
     socket.to(connections[parseInt(message.sendTo)]).emit('chat-message', message);
