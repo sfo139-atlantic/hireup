@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuthState } from "react-firebase-hooks/auth";
 
+import { auth, logout } from "../src/firebase";
 import Navbar from '../components/Navbar';
 import { DropDownMenu } from '../components/DropDownMenu';
 import { aLinkGreen } from '../styles/styles.js';
@@ -66,6 +68,7 @@ const titleStyling = `
   text-xs
 `;
 const Explore = () => {
+  const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
   const [specialty, setSpecialty] = useState('');
   const [sort, setSort] = useState('');
@@ -73,31 +76,29 @@ const Explore = () => {
   useEffect(() => {
     axios.get('http://localhost:3001/profiles')
       .then((results) => {
-        let userProfiles = [];
-        if (specialty === '' && timezone === '') {
-          userProfiles = results.data;
-        }
-        if (specialty !== '') {
-          results.data.forEach((user) => {
-            if (user.freelancer[specialty] === true) {
-              userProfiles.push(user);
-            }
-          });
-        }
-        if (timezone !== '') {
-          results.data.forEach((user) => {
-            if (user.timezones.indexOf(timezone) > -1) {
-              userProfiles.push(user);
-            }
-          });
-        }
+        let userProfiles = results.data;
+        console.log(userProfiles)
         if (sort === 'Highest to Lowest') {
           userProfiles.sort(({ rate: a }, { rate: b }) => (a > b) ? 1 : -1);
         }
         if (sort === 'Lowest to Highest') {
           userProfiles.sort(({ rate: a }, { rate: b }) => (a > b) ? -1 : 1);
         }
-        setUsersData(userProfiles);
+        if (specialty === '' && timezone === '') {
+          setUsersData(userProfiles)
+        }
+        if (specialty !== '') {
+          const sortedProfiles = userProfiles.filter(ele => ele.freelancer[specialty]);
+          setUsersData(sortedProfiles);
+        }
+        if (timezone !== '') {
+          const sortedProfiles = userProfiles.filter(ele => ele.timezones.indexOf(timezone) > -1);
+          setUsersData(sortedProfiles);
+        }
+        if (timezone !== '' && specialty !== '') {
+          const sortedProfiles = userProfiles.filter(ele => ele.freelancer[specialty]).filter(ele => ele.timezones.indexOf(timezone) > -1);
+          setUsersData(sortedProfiles);
+        }
       })
       .catch((err) => {
         throw err
@@ -117,8 +118,8 @@ const Explore = () => {
             const titles = Object.entries(user.freelancer);
             const userTitles = [];
             for (let i = 0; i < titles.length; i++) {
-              if (titles[i][0] === specialty && titles[i][1]) {
-                userTitles.push(specialty);
+              if (titles[i][1]) {
+                userTitles.push(titles[i][0]);
               }
             }
             const userTitleString =userTitles.join(', ');
