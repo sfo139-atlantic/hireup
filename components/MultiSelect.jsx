@@ -79,7 +79,8 @@ const options = {
     { value: 'Mountain', label: 'Mountain'},
     { value: 'Central', label: 'Central'},
     { value: 'Eastern', label: 'Eastern'},
-  ]
+  ],
+  portfolio: []
 }
 
 export default function CreatableMulti(props) {
