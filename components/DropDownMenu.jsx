@@ -4,7 +4,7 @@ const selectName = `
   bg-white
   text-black
   font-semibold
-  py-2 px-4
+  py-2 px-7
   rounded
   inline-flex
   items-center
