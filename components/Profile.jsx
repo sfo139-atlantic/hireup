@@ -9,8 +9,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 const Profile = () => {
   const [user] =useAuthState(auth);
 
-
-
   const fakeData = {
     _id:1,
     firstName:"Jesse",
@@ -40,19 +38,22 @@ const Profile = () => {
         </div>
         <div className="px-5">
           <h1>
-            Description
+            Description:
           </h1>
           <p>
             {fakeData.skills}
           </p>
         </div>
       </div>
-      <div className="row-span-3 border">
-        <img src={typeof fakeData.profile_pic === 'string' ? fakeData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
-        <div>
+      <div className="row-span-4 border">
+        <img className='shrink-0 grow-0 w-full h-2/5 rounded-md' src={typeof fakeData.profile_pic === 'string' ? fakeData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
+        <div className='text-center'>
           Name: {`${fakeData.firstName} ${fakeData.lastName}`}
         </div>
         <div>
+
+        </div>
+        <div className='text-center'>
           Hourly: ${fakeData.rate.$numberDecimal}
         </div>
       </div>

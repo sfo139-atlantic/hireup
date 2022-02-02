@@ -5,7 +5,7 @@ export default function profile() {
   return (
     <div>
       <Profile/>
-      <h1>What supsadfbsdijfdsaiufisad</h1>
+      <h1>Fast Refresh not working</h1>
     </div>
   )
 }
