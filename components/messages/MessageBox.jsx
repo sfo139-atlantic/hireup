@@ -39,9 +39,14 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
       <div className="relative w-[100%] p-6 overflow-y-auto h-[80vh]">
         {/* {connectionStatus ? <div>Status: Connected</div> : <div> Status: Disconnected</div>} */}
         {messages.map(message => {return message.user == sendTo ?
-        <div className=" flex justify-start " >
+        <div className=" flex justify-start flex-col" >
+          <div className="pl-1 pt-1 text-xs text-grey">
+            {selectedUsername}
+            <br/>
+          </div>
+
           <div className="relative max-w-xl text-white bg-green rounded-lg shadow p-1 m-1 w-auto">
-          {message.message}
+            {message.message}
           </div>
         </div>
         :
@@ -52,12 +57,16 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
         </div>
           })}
       </div>
-      <form onSubmit={messageSubmitHandler} >
-        <input type='text' ref={messageInput} className="w-{90%}"></input>
-        <button>
-          Send
-        </button>
-      </form>
+      <div className="flex flex-col m-1">
+        <form onSubmit={messageSubmitHandler} >
+          <input type='text' ref={messageInput} className=" w-full m-1 shadow focus:outline-none focus:shadow-grey pl-12 bg-gray-200 rounded-full py-3"></input>
+          <div className="flex justify-end">
+            <button className="text-xs text-grey">
+              Send
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }
