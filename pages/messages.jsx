@@ -7,7 +7,6 @@ import Navbar from '../components/Navbar.jsx';
 import { auth } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-
 const MessagesList = () =>{
   const [selectedChat, setSelectedChat] = useState(null);
   // const router = useRouter();
@@ -81,6 +80,7 @@ const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserna
 
   useEffect(async ()=>{
     message.users.map(async (id)=> {
+      console.log(typeof id)
       if(id !== uid){
         const sendToProfile = axios.get('http://localhost:3001/profiles/findOne', {
           params: {

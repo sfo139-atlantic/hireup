@@ -20,9 +20,7 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
     socket.on('chat-message', data => {
       setMessages((prev)=>[...prev, data])
     })
-  }, [])
-
-
+  }, []);
 
   const messageSubmitHandler = (e) =>{
     e.preventDefault();
