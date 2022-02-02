@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { aLinkGreen, aLinkGrey } from '../styles/styles';
-import { auth, logInWithEmailAndPassword, signInWithGoogle, sendPasswordReset } from "../src/firebase";
+import { auth, logout } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from 'next/router'
 
@@ -19,6 +19,9 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
+
+  const [user] = useAuthState(auth);
+
   return (
     <Disclosure as="nav" className="sticky top-0 left-0 right-0 bg-white border border-b-grey">
       {({ open }) => (
@@ -77,7 +80,9 @@ const Navbar = () => {
                     ))}
                 <a key="Join" href="signup" className={aLinkGreen}>Join</a>
                 {/* Profile dropdown */}
-                {/* <Menu as="div" className="ml-3 relative">
+                {
+                user ?
+                <Menu as="div" className="ml-3 relative">
                   <div>
                     <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                       <span className="sr-only">Open user menu</span>
@@ -101,20 +106,10 @@ const Navbar = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="profile"
                             className={classNames(active ? 'bg-green' : '', 'block px-4 py-2 text-sm text-black')}
                           >
                             Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(active ? 'bg-green' : '', 'block px-4 py-2 text-sm text-black')}
-                          >
-                            Settings
                           </a>
                         )}
                       </Menu.Item>
@@ -130,7 +125,10 @@ const Navbar = () => {
                       </Menu.Item>
                     </Menu.Items>
                   </Transition>
-                </Menu> */}
+                </Menu>
+                :
+                <></>
+                }
               </div>
             </div>
           </div>
