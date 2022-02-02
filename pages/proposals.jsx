@@ -48,10 +48,22 @@ const fakeProposals = [
 
 
 const Proposal = ({ user }) => {
-  const [currProposal, setCurrProposal] = useState(fakeProposals[0])
+  const [allProposals, setAllProposal] = useState(fakeProposals)
+  const [currProposal, setCurrProposal] = useState({id: "New", headline: "", overview: "", skills: "", timeline: "", location: "", budget: "", timezone:""})
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/profiles/${'ozrPwHybIkP8zDw3VLEdOWUpGnK2'}`)
+      .then((results) => {
+        setAllProposal(results.data[0].proposals)
+      })
+      .catch((err) => {
+        throw err
+      })
+  }, []);
 
   const switchProposal = (proposal) => {
-    setCurrProposal(proposal)
+    console.log('switching proposal')
+    // setCurrProposal(proposal)
   }
 
   const updateProposal = (proposal) => {
@@ -69,7 +81,7 @@ const Proposal = ({ user }) => {
     <div class="grid grid-cols-5 gap-4">
       <div class="col-span-5 text-center"><Navbar /></div>
       <div class="row-span-3">
-        <Sidebar currProposal={currProposal} switchProposal={switchProposal} allProposals={fakeProposals} />
+        <Sidebar currProposal={currProposal} switchProposal={switchProposal} allProposals={allProposals} />
       </div>
       <div class="col-span-3">
 

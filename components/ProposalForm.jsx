@@ -4,26 +4,26 @@ import DatePicker from './ProposalDatePicker.jsx';
 
 
 
-export default function ProposalForm(props) {
-  const [headline, setHeadline] = useState(props.currProposal.headline)
-  const [overview, setOverview] = useState(props.currProposal.overview)
-  const [skills, setSkills] = useState(props.currProposal.skills)
-  const [start, setStart] = useState(props.currProposal.start)
-  const [end, setEnd] = useState(props.currProposal.end)
-  const [location, setLocation] = useState(props.currProposal.location)
-  const [budget, setBudget] = useState(props.currProposal.budget)
-  const [timezone, setTimezone] = useState(props.currProposal.timezone)
+export default function ProposalForm({ currProposal, addProposal, updateProposal }) {
+  const [headline, setHeadline] = useState(currProposal.headline)
+  const [overview, setOverview] = useState(currProposal.overview)
+  const [skills, setSkills] = useState(currProposal.skills)
+  const [start, setStart] = useState(currProposal.timeline.start)
+  const [end, setEnd] = useState(currProposal.timeline.end)
+  const [location, setLocation] = useState(currProposal.location)
+  const [budget, setBudget] = useState(currProposal.budget)
+  const [timezone, setTimezone] = useState(currProposal.timezone)
 
   useEffect(() => {
-    setHeadline(props.currProposal.headline)
-    setOverview(props.currProposal.overview)
-    setSkills(props.currProposal.skills)
-    setStart(props.currProposal.start)
-    setEnd(props.currProposal.end)
-    setLocation(props.currProposal.location)
-    setTimezone(props.currProposal.timezone)
-    setBudget(props.currProposal.budget)
-  }, [props.currProposal])
+    setHeadline(currProposal.headline)
+    setOverview(currProposal.overview)
+    setSkills(currProposal.skills)
+    setStart(currProposal.timeline.start)
+    setEnd(currProposal.timeline.end)
+    setLocation(currProposal.location)
+    setTimezone(currProposal.timezone)
+    setBudget(currProposal.budget)
+  }, [currProposal])
 
   const handleChange = (type, value) => {
     const typeToSetState = {
@@ -41,9 +41,9 @@ export default function ProposalForm(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (props.currProposal.id === 'New') {
-      props.addProposal({
-        id: props.currProposal.id,
+    if (currProposal.id === 'New') {
+      addProposal({
+        id: currProposal.id,
         headline,
         overview,
         skills,
@@ -54,8 +54,8 @@ export default function ProposalForm(props) {
         budget
       })
     } else {
-      props.updateProposal({
-        id: props.currProposal.id,
+      updateProposal({
+        id: currProposal.id,
         headline,
         overview,
         skills,
@@ -72,7 +72,7 @@ export default function ProposalForm(props) {
   return (
     <div class="col-span-3 px-4">
         <div class="text-center text-4xl py-6 font-bold">
-          <p>{props.currProposal.id === "New" ? "New Proposal" : props.currProposal.headline}</p>
+          <p>{currProposal.id === "New" ? "New Proposal" : currProposal.headline}</p>
         </div>
       <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div class="mb-4">
@@ -92,7 +92,7 @@ export default function ProposalForm(props) {
           <label class="block text-gray-700 text-sm font-bold mb-2" for="overview">
             Skills Required
           </label>
-          <MultiSelect  type="skills" id={props.currProposal.id} selected={props.currProposal.skills} handleChange={handleChange}/>
+          <MultiSelect  type="skills" id={currProposal.id} selected={currProposal.skills} handleChange={handleChange}/>
         </div>
 
         <div class="mb-4">
@@ -102,7 +102,7 @@ export default function ProposalForm(props) {
                 Estimated Start Date
               </label>
               <div>
-                <DatePicker id={props.currProposal.id} date={start} handleChange={(value) => handleChange('start', value)} />
+                <DatePicker id={currProposal.id} date={1643841167356} handleChange={(value) => handleChange('start', value)} />
               </div>
             </div>
             <div class="pr-10">
@@ -110,7 +110,7 @@ export default function ProposalForm(props) {
                 Estimated End Date
               </label>
               <div>
-                <DatePicker id={props.currProposal.id} date={end} handleChange={(value) => handleChange('end', value)} />
+                <DatePicker id={currProposal.id} date={1643841167356} handleChange={(value) => handleChange('end', value)} />
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function ProposalForm(props) {
           <label class="block text-gray-700 text-sm font-bold mb-2" for="location">
             Timezone Preference
           </label>
-          <MultiSelect  type="timezone" id={props.currProposal.id} selected={props.currProposal.timezone} handleChange={handleChange}/>
+          <MultiSelect  type="timezone" id={currProposal.id} selected={currProposal.timezone} handleChange={handleChange}/>
         </div>
 
         <div class="mb-6">
@@ -146,7 +146,7 @@ export default function ProposalForm(props) {
 
         <div class="flex items-end">
           <button class="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
-            {props.currProposal.id === "New" ? "Publish" : "Update"}
+            {currProposal.id === "New" ? "Publish" : "Update"}
           </button>
         </div>
       </form>
