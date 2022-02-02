@@ -3,11 +3,16 @@ import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { aLinkGreen, aLinkGrey } from '../styles/styles';
+import { auth, logInWithEmailAndPassword, signInWithGoogle, sendPasswordReset } from "../src/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from 'next/router'
+
 
 const navigation = [
   { name: 'Explore', href: 'explore', current: false },
   { name: 'Login', href: 'login', current: false },
-]
+];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
