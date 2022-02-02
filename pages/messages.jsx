@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { io } from 'socket.io-client';
 import axios from 'axios';
 import MessageBox from '../components/messages/MessageBox.jsx';
+import MessageDetail from '../components/messages/MessageDetail.jsx';
 import Navbar from '../components/Navbar.jsx';
 import { auth } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -73,46 +74,5 @@ const MessagesList = () =>{
 
   )
 };
-
-const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUsername}) => {
-  const [user, setUser] = useState('');
-  const [sendToID, setSendToID] = useState('');
-
-  useEffect(async ()=>{
-    message.users.map(async (id)=> {
-      console.log(typeof id)
-      if(id !== uid){
-        const sendToProfile = axios.get('http://localhost:3001/profiles/findOne', {
-          params: {
-            uid: id
-          }
-        })
-          .then((res)=>{
-            setUser(res.data.firstName + ' ' + res.data.lastName)
-            setSendToID(res.data._id)
-          })
-      }
-    })
-  }, []);
-
-  const clickHandler = () => {
-    setSelected(sendToID);
-    setSelectedUsername(user);
-    setMessage(message)
-  }
-  return (
-    <div>
-      {user
-      ?
-      (<p className="text-white border-2 bg-green rounded-lg font-bold p-2" onClick={clickHandler}>
-        {user}
-      </p>)
-      :
-      <p>
-        Loading Username...
-      </p>}
-    </div>
-  )
-}
 
 export default MessagesList
