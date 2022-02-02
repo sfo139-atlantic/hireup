@@ -3,6 +3,9 @@ import Profile from '../components/profile'
 
 export default function profile() {
   return (
-    <Profile/>
+    <div>
+      <Profile/>
+      <h1>What supsadfbsdijfdsaiufisad</h1>
+    </div>
   )
 }

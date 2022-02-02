@@ -40,7 +40,7 @@ const Profile = () => {
         </div>
         <div className="px-5">
           <h1>
-            Descriptions
+            Description
           </h1>
           <p>
             {fakeData.skills}
