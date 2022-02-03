@@ -6,8 +6,8 @@ import { auth, logout } from "../src/firebase";
 import Navbar from '../components/Navbar';
 import { DropDownMenu } from '../components/DropDownMenu';
 import { aLinkGreen } from '../styles/styles.js';
+import { numberWithCommas } from '../src/helperFunctions.js';
 
-const numberWithCommas = (number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 const exploreContainer = `
   flex
   flex-col
@@ -151,7 +151,7 @@ const Explore = () => {
                 {user.firstName}{', '}{user.lastName}
                 </div>
                 <div className={rateStyling}>
-                  Rate/hr:{' $'}{numberWithCommas(user.rate.$numberDecimal)}
+                  Rate/hr:{' $'}{numberWithCommas(user.rate)}
                 </div>
                 <div className={titleStyling}>
                   {userTitleString}
