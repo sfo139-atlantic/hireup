@@ -15,13 +15,16 @@ app.listen(PORT, () => {
 //Get Profiles and Profile information
 app.get('/profiles', controllers.profiles.get);
 app.get('/profiles/findOne', controllers.profiles.getOne);
+app.post('/create',controllers.profiles.post);
+app.put('/update',controllers.profiles.put);
+app.put('/delete', controllers.profiles.delete)
+
 
 //Get messages and message info
 app.get('/message', controllers.messages.getOne);
 app.get('/messages', controllers.messages.getAll);
 
-//WEBSOCKET EXPERIMENTATION
-
+//WEBSOCKET
 const io = require('socket.io')(3002, {
   cors: {
     origin: "http://localhost:3000",
@@ -29,22 +32,6 @@ const io = require('socket.io')(3002, {
   }
 });
 let connections = {};
-
-// io.on('connection', socket => {
-//   socket.emit('connect-verify', 'Websocket Connection Created');
-
-//   socket.on('handshake', data => {
-//     connections[data] = socket.id;
-//     console.log(connections)
-//   });
-//   socket.on('send-chat-message', message => {
-//     console.log(connections[message.sendTo])
-//     socket.emit('chat-message', message);
-//     socket.to(connections[message.sendTo]).emit('chat-message', message);
-//   })
-
-// });
-
 
 io.on('connection', socket => {
   const db = require('./models/mongo.js');
