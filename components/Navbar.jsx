@@ -5,7 +5,8 @@ import { BellIcon, MenuIcon, XIcon, UserIcon } from '@heroicons/react/outline';
 import { aLinkGreen, aLinkGrey } from '../styles/styles';
 import { auth, logout } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 
 const navigation = [
@@ -44,39 +45,45 @@ const Navbar = () => {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                  <a
-                    href='/'
-                    >
-                    <img
-                      className='block lg:hidden h-8 w-auto'
-                      src="/HireUpLogo.svg"
-                      alt="Workflow"
-                    />
-                  </a>
-                  <a
-                    href='/'
-                    >
-                    <img
-                      className='hidden lg:block h-8 w-auto'
-                      src="/HireUpLogo.svg"
-                      alt="Workflow"
-                    />
-                  </a>
+                    <Link href='/'>
+                      <a>
+                        <img
+                          className='block lg:hidden h-8 w-auto'
+                          src="/HireUpLogo.svg"
+                          alt="Workflow"
+                        />
+                      </a>
+                    </Link>
+                    <Link href='/'>
+                      <a>
+                        <img
+                          className='hidden lg:block h-8 w-auto'
+                          src="/HireUpLogo.svg"
+                          alt="Workflow"
+                        />
+                      </a>
+                    </Link>
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <a key='Explore' href='explore' className='text-grey hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>Explore</a>
+                <Link href='explore'>
+                  <a className='text-grey hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>Explore</a>
+                </Link>
                 {
                   user === null ?
-                  <a key='Login' href='login' className='text-grey hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>Login</a>
+                  <Link href='login'>
+                    <a className='text-grey hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>Login</a>
+                  </Link>
                   :
                   <></>
                 }
                 {/* Profile dropdown */}
                 {
                 user === null ?
-                <a key="Join" href="signup" className={aLinkGreen}>Join</a>
+                <Link href="signup">
+                  <a className={aLinkGreen}>Join</a>
+                </Link>
                 :
                 <Menu as="div" className="ml-3 relative">
                   <div>
@@ -97,22 +104,24 @@ const Navbar = () => {
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="profile"
-                            className={classNames(active ? 'bg-green' : '', 'block px-4 py-2 text-sm text-black')}
-                          >
-                            Your Profile
-                          </a>
+                          <Link href="profile">
+                            <a
+                              className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
+                            >
+                              Your Profile
+                            </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="messages"
-                            className={classNames(active ? 'bg-green' : '', 'block px-4 py-2 text-sm text-black')}
-                          >
-                            Messages
-                          </a>
+                          <Link href="messages">
+                            <a
+                              className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
+                            >
+                              Messages
+                            </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
