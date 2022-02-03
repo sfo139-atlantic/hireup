@@ -9,21 +9,21 @@ module.exports = {
     res.send(profiles[0]);
   },
   post: async (req, res) => {
-    const {id, email} = req.body;
-
-    model.post({id, email}).then(result => {
+    const {_id, email} = req.body;
+    console.log(_id)
+    model.post({_id, email}).then(result => {
       if(result) res.status(201).send()
     })
   },
   put: async (req, res) => {
-    const {id, email, info} = req.body;
-    model.put({id, email, info}).then(result => {
+    const {_id, info} = req.body;
+    model.put({_id, info}).then(result => {
       if(result) res.status(204).send()
     })
   },
   delete: async (req, res) => {
-    const {id} = req.body;
-    model.delete(id).then(result => {
+    const {_id} = req.body;
+    model.delete(_id).then(result => {
       if(result) res.status(204).send()
     })
   }
