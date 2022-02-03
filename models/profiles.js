@@ -8,18 +8,43 @@ module.exports = {
       throw e;
     }
   },
-  post: async ({_id, email}) => {
+  getOne: async (uid) => {
     try {
-      const result = await db.profiles.findOneAndUpdate({_id: id, email}, {$set:{_id: id, email,}}, {upsert: true});
+      const profiles = await db.profiles.find({_id: uid}).toArray();
+      return profiles;
+    } catch(e) {
+      throw e;
+    }
+  },
+
+  post: async ({_id, email}) => {
+    const firstName = '';
+    const lastName = '';
+    const freelancer =  {
+      "Production Manager": false,
+      "Designer": false,
+      "Software Engineer": false
+    };
+    const rate = 0;
+    const work_history ='';
+    const skills = [];
+    const education ='';
+    const location = '';
+    const portfolio = [];
+    const proposals = [];
+    const profile_pic ='';
+    const timezones = [];
+    try {
+      const result = await db.profiles.findOneAndUpdate({_id, email}, {$set:{_id, email,firstName, lastName, freelancer, rate, work_history, skills, education, location, portfolio, proposals, profile_pic, timezones}}, {upsert: true});
       return true
     } catch(e) {
       throw e;
     }
   },
-  put: async ({id, info}) => {
+  put: async ({_id, info}) => {
     const {firstName, lastName, freelancer, rate, work_history, skills, education, location, portfolio, proposals, profile_pic, timezones} = info;
     try {
-      const result = await db.profiles.updateOne({_id: id},{$set:{
+      const result = await db.profiles.updateOne({_id},{$set:{
         firstName, lastName, freelancer, rate:Number(Number(rate).toFixed(2)), work_history, skills, education, location, portfolio, proposals, profile_pic, timezones
       }})
       return true;
@@ -27,9 +52,9 @@ module.exports = {
       throw e;
     }
   },
-  delete: async (id) => {
+  delete: async (_id) => {
     try{
-      const result = await db.profiles.deleteOne({_id: id});
+      const result = await db.profiles.deleteOne({_id});
       return true;
     } catch (e) {
       throw e;
