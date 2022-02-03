@@ -21,7 +21,7 @@ module.exports = {
     const {firstName, LastName, freelancer, rate, work_history, skills, education, location, portfolio, proposals, profile_pic, timezones} = info
     try {
       const result = await db.profiles.updateOne({email, id},{$set:{
-        firstName, LastName, freelancer, rate, work_history, skills, education, location, portfolio, proposals, profile_pic, timezones
+        firstName, lastName, freelancer, rate, work_history, skills, education, location, portfolio, proposals, profile_pic, timezones
       }})
       return true;
     } catch(e) {
