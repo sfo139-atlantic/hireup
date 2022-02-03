@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { BellIcon, MenuIcon, XIcon, UserIcon } from '@heroicons/react/outline';
 import { aLinkGreen, aLinkGrey } from '../styles/styles';
 import { auth, logout } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -80,14 +80,9 @@ const Navbar = () => {
                 :
                 <Menu as="div" className="ml-3 relative">
                   <div>
-                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green">
                       <span className="sr-only">Open user menu</span>
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                      {/* <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      /> */}
+                      <UserIcon className="w-6 h-6 text-grey hover:text-green" />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -107,6 +102,16 @@ const Navbar = () => {
                             className={classNames(active ? 'bg-green' : '', 'block px-4 py-2 text-sm text-black')}
                           >
                             Your Profile
+                          </a>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="messages"
+                            className={classNames(active ? 'bg-green' : '', 'block px-4 py-2 text-sm text-black')}
+                          >
+                            Messages
                           </a>
                         )}
                       </Menu.Item>
@@ -137,6 +142,14 @@ const Navbar = () => {
                   className='text-grey hover:bg-green hover:text-black block px-3 py-2 rounded-md text-base font-medium'
                 >
                   Home
+                </Disclosure.Button>
+                <Disclosure.Button
+                  key='Home'
+                  as="a"
+                  href='messages'
+                  className='text-grey hover:bg-green hover:text-black block px-3 py-2 rounded-md text-base font-medium'
+                >
+                  Messages
                 </Disclosure.Button>
             </div>
           </Disclosure.Panel>
