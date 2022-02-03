@@ -17,7 +17,9 @@ app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
 });
 
-app.get('/profiles', controllers.profiles.get)
+app.get('/profiles', controllers.profiles.get);
+app.post('/createProfile',controllers.profiles.post)
+app.put('/editProfile',controllers.profiles.put)
 
 
 
