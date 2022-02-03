@@ -48,7 +48,7 @@ const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
         </div>
         :
         <div className="flex justify-end">
-          <div className="relative max-w-xl text-black bg-white rounded-lg shadow p-1 m-1 w-auto transition-all fade-in delay-150 translate-x-full">
+          <div className="relative max-w-xl text-black bg-white rounded-lg shadow p-1 m-1 w-auto">
             {message.message}
           </div>
         </div>
