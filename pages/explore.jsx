@@ -73,6 +73,10 @@ const titleStyling = `
   flex-wrap
   text-xs
 `;
+const viewProfile = `
+  ${aLinkGreen}
+  pl-24
+  `
 const Explore = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
@@ -152,7 +156,7 @@ const Explore = () => {
                 <div className={titleStyling}>
                   {userTitleString}
                 </div>
-                <button type="button" className={aLinkGreen}>View Profile</button>
+                <a className={viewProfile} href="profile" >View Profile</a>
               </div>
             );
           })}
