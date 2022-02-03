@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthState } from "react-firebase-hooks/auth";
+
 import { auth, logout } from "../src/firebase";
 import Navbar from '../components/Navbar';
 import { DropDownMenu } from '../components/DropDownMenu';
 import { aLinkGreen } from '../styles/styles.js';
 import { numberWithCommas } from '../src/helperFunctions.js';
-import UserContext from '../src/context.jsx';
 
 const exploreContainer = `
   flex
@@ -77,13 +77,12 @@ const viewProfile = `
   ${aLinkGreen}
   pl-24
   `
-const Explore = () => {
+const ExploreProposals = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
   const [specialty, setSpecialty] = useState('');
   const [sort, setSort] = useState('');
   const [timezone, setTimezone] = useState('');
-  const {viewProfileID, setViewProfileID} = useContext(UserContext);
   useEffect(() => {
     axios.get('http://localhost:3001/profiles')
       .then((results) => {
@@ -157,9 +156,7 @@ const Explore = () => {
                 <div className={titleStyling}>
                   {userTitleString}
                 </div>
-                <a className={viewProfile} href="profile" onClick={() => {
-                  setViewProfileID(user._id);
-                }}>View Profile</a>
+                <a className={viewProfile} href="profile" >View Profile</a>
               </div>
             );
           })}
@@ -169,4 +166,4 @@ const Explore = () => {
   )
 };
 
-export default Explore;
+export default ExploreProposals;
