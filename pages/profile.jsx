@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import Navbar from '../components/Navbar.jsx'
-// import Carousel from './Carousel.jsx'
 import { auth, logout } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import axios from 'axios';
 
 const fakeData = {
   _id:1,
@@ -52,15 +51,13 @@ export default function profile() {
     })
   }, []);
 
-  console.log(userData);
+console.log(userData)
 
   return (
     <div>
       <Navbar />
       <div className='flex h-full w-128 justify-between'>
-
-
-        <div className='flex flex-col h-full w-104 ml-6 mt-6 rounded-lg'>
+        <div className='flex flex-col h-full w-104 ml-6 mt-6 border rounded-lg mr-4'>
           <div>
             <img className='h-64 w-64 rounded-full mx-auto mt-2' src={typeof fakeData.profile_pic === 'string' ? fakeData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
           </div>
@@ -68,32 +65,33 @@ export default function profile() {
             <button className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-2">Contact</button>
           </div>
           <div className='flex flex-col'>
-            <div className='flex flex-row text-left my-2 ml-8'>
-              <div className='text-[#7D7D7D] mr-2'>{nameOfUserIcon}</div>
-              <div className='text-[#7D7D7D]'>Name:</div>
-              <div className='text-right ml-2'>{` ${fakeData.firstName} ${fakeData.lastName}`}</div>
+            <div className='flex flex-row justify-between my-2 ml-8'>
+              <div className='flex'>
+                <div className='text-[#7D7D7D] mr-2'>{nameOfUserIcon}</div>
+                <div className='text-[#7D7D7D]'>Name:</div>
+              </div>
+                <div className='text-right mr-4'>{` ${fakeData.firstName} ${fakeData.lastName}`}</div>
             </div>
-            <div className='flex flex-row text-left my-2 ml-8'>
-              <div className='text-[#7D7D7D] mr-2'>{summaryOfUserIcon}</div>
-              <div className='text-[#7D7D7D]'>Summary:</div>
-              <div className='ml-2'>{` ${fakeData.skills}`}</div>
+            <div className='flex flex-row justify-between my-2 ml-8'>
+              <div className='flex'>
+                <div className='text-[#7D7D7D] mr-2'>{hourlyRateIcon}</div>
+                <div className='text-[#7D7D7D]'>Hourly Rate:</div>
+              </div>
+                <div className='mr-4'>${fakeData.rate.$numberDecimal}</div>
             </div>
-            <div className='flex flex-row text-left my-2 ml-8'>
-              <div className='text-[#7D7D7D] mr-2'>{hourlyRateIcon}</div>
-              <div className='text-[#7D7D7D]'>Hourly Rate:</div>
-              <div className='ml-2'>${fakeData.rate.$numberDecimal}</div>
+            <div className='flex flex-row justify-between my-2 ml-8'>
+              <div className='flex'>
+                <div className='text-[#7D7D7D] mr-2'>{summaryOfUserIcon}</div>
+                <div className='text-[#7D7D7D]'>Summary:</div>
+              </div>
+              <div className='ml-6 justify-start'>{fakeData.skills}</div>
             </div>
           </div>
         </div>
-
-
-
-
           <div className='flex flex-col h-7/12 w-7/12 mt-6 mr-6 rounded-lg  overflow-y-auto' style={{height:'90vh'}}>
-
-            <div className='h-full w-full mx-auto '>
+            <div className='h-full w-full mx-auto'>
               <Swiper
-                spaceBetween={10}
+                spaceBetween={0}
                 slidesPerView={1}
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}>
@@ -115,10 +113,7 @@ export default function profile() {
                 </SwiperSlide>
               </Swiper>
             </div>
-
-
-            <div className='w-full mx-auto p-5'>
-
+            <div className='w-full mx-auto p-7'>
               <div className='flex justify-between'>
                 <div>
                   <h1 className='my-2 text-[#7D7D7D]'>
@@ -129,7 +124,6 @@ export default function profile() {
                   {fakeData.education}
                 </p>
               </div>
-
               <div className='flex justify-between'>
                 <h1 className='my-2 text-[#7D7D7D]'>
                   Description:
@@ -138,8 +132,6 @@ export default function profile() {
                   {fakeData.skills}
                 </p>
               </div>
-
-
               <div className='flex justify-between'>
                 <h1 className='w-auto my-2 text-[#7D7D7D]'>
                   Work History:
@@ -148,7 +140,6 @@ export default function profile() {
                   {fakeData.work_history}
                 </p>
               </div>
-
               <div className='flex justify-between'>
                 <h1 className='my-2 text-[#7D7D7D]'>
                   Description:
@@ -157,13 +148,8 @@ export default function profile() {
                   {fakeData.skills}
                 </p>
               </div>
-
-
-
-
             </div>
           </div>
-
       </div>
     </div>
   )
