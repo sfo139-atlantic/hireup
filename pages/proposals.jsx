@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 import ProposalForm from '../components/ProposalForm.jsx'
-import Sidebar from '../components/ProposalSideBar.jsx'
+import Sidebar from '../components/ProposalSidebar.jsx'
 import Navbar from '../components/Navbar.jsx'
 import React, { useState, useEffect } from 'react'
 
