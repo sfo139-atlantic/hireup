@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import Link from 'next/link';
-import React, { useState } from 'react';
-import LogIn from '../components/LogIn.jsx'
-export default function LogInPage() {
-  return <LogIn/>
-}
-=======
 import React, { useEffect, useState } from "react";
 import { auth, logInWithEmailAndPassword, signInWithGoogle, sendPasswordReset } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -99,4 +91,3 @@ const LogIn = () => {
   )
 }
 export default LogIn;
->>>>>>> main

@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import SignUp from "../components/SignUp.jsx"
-export default function SignUpPage() {
-  return <SignUp/>
-}
-=======
 import React, { useState, useEffect } from 'react';
 import { auth, registerWithEmailAndPassword } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -87,4 +81,3 @@ const SignUp = () => {
 }
 
 export default SignUp;
->>>>>>> main
