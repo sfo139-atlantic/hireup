@@ -35,7 +35,6 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
   return (
     <div className="">
       <div className="relative w-[100%] p-6 overflow-y-auto h-[80vh]">
-        {/* {connectionStatus ? <div>Status: Connected</div> : <div> Status: Disconnected</div>} */}
         {messages.map(message => {return message.user == sendTo ?
         <div className=" flex justify-start flex-col" >
           <div className="pl-1 pt-1 text-xs text-grey">

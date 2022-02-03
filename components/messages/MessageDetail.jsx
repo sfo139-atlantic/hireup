@@ -1,7 +1,7 @@
 import {useEffect, useState, useRef} from 'react';
 import axios from 'axios';
 
-const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUsername}) => {
+const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUsername, selected}) => {
   const [user, setUser] = useState('');
   const [sendToID, setSendToID] = useState('');
 
@@ -27,11 +27,16 @@ const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserna
     setSelectedUsername(user);
     setMessage(message)
   }
+
   return (
     <div>
       {user
       ?
-      (<p className="text-white border-2 bg-green rounded-lg font-bold p-2" onClick={clickHandler}>
+      (message.users.includes(sendToID) ? <p className="text-white border-2 bg-green rounded-lg font-bold p-2" onClick={clickHandler}>
+        {user}
+      </p>
+      :
+      <p className="text-black border-2 bg-white rounded-lg font-bold p-2" onClick={clickHandler}>
         {user}
       </p>)
       :
