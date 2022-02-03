@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useEffect, useState } from "react";
 import { auth, logInWithEmailAndPassword, signInWithGoogle, sendPasswordReset } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
