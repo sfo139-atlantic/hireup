@@ -16,7 +16,7 @@ module.exports = {
       throw e;
     }
   },
-  put: async ({id, email, info}) => { 
+  put: async ({id, email, info}) => {
     const {firstName, lastName, freelancer, rate, work_history, skills, education, location, portfolio, proposals, profile_pic, timezones} = info;
     try {
       const result = await db.profiles.updateOne({_id: id},{$set:{
