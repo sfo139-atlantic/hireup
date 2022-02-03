@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { auth, registerWithEmailAndPassword } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Navbar from '../components/Navbar.jsx';
 
 const classes = {
   input:"block border border-grey-light w-full p-3 rounded mb-4 outline-none",
@@ -33,6 +34,8 @@ const SignUp = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <form className="min-h-screen flex flex-col" onSubmit={handleSubmit}>
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div className="bg-white px-6 py-8 rounded shadow-md w-full">
@@ -77,6 +80,7 @@ const SignUp = () => {
         </div>
       </div>
     </form>
+    </>
   )
 }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { auth, logInWithEmailAndPassword, signInWithGoogle, sendPasswordReset } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from 'next/router'
+import Navbar from '../components/NavbarSplash.jsx';
 
 const classes = {
   input:'block border border-grey-light w-full p-3 rounded mb-4',
@@ -40,6 +41,7 @@ const LogIn = () => {
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
+      <Navbar/>
       <form className="w-full md:w-1/3 bg-white rounded-lg" onSubmit={handleSubmit}>
         <div className="flex font-bold justify-center mt-6">
             <img className="h-20 w-20"

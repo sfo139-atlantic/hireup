@@ -57,10 +57,10 @@ export default function profile() {
   return (
     <div>
       <Navbar />
-      <div className='flex h-full w-128 border-4 justify-between'>
+      <div className='flex h-full w-128 justify-between'>
 
 
-        <div className='flex flex-col h-full w-104 ml-6 mt-6 border rounded-lg'>
+        <div className='flex flex-col h-full w-104 ml-6 mt-6 rounded-lg'>
           <div>
             <img className='h-64 w-64 rounded-full mx-auto mt-2' src={typeof fakeData.profile_pic === 'string' ? fakeData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
           </div>
@@ -89,9 +89,9 @@ export default function profile() {
 
 
 
-          <div className='flex flex-col h-7/12 w-7/12 mt-6 mr-6 rounded-lg  overflow-y-auto border' style={{height:'90vh'}}>
+          <div className='flex flex-col h-7/12 w-7/12 mt-6 mr-6 rounded-lg  overflow-y-auto' style={{height:'90vh'}}>
 
-            <div className='h-full w-full mx-auto mt-8'>
+            <div className='h-full w-full mx-auto '>
               <Swiper
                 spaceBetween={10}
                 slidesPerView={1}
@@ -117,7 +117,7 @@ export default function profile() {
             </div>
 
 
-            <div className='w-full mx-auto border p-7'>
+            <div className='w-full mx-auto p-5'>
 
               <div className='flex justify-between'>
                 <div>
