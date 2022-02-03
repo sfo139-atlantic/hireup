@@ -57,8 +57,8 @@ export default function profile() {
   return (
     <div>
       <Navbar />
-      <div className='flex flex-row h-full w-full'>
-        <div className='flex flex-col h-full w-2/5 ml-6 mt-6 border rounded-lg'>
+      <div className='flex flex-row h-full w-128 border gap-6'>
+        <div className='flex flex-col h-full w-104 ml-6 mt-6 border rounded-lg'>
           <div>
             <img className='h-64 w-64 rounded-full mx-auto mt-2' src={typeof fakeData.profile_pic === 'string' ? fakeData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
           </div>
@@ -83,9 +83,9 @@ export default function profile() {
             </div>
           </div>
         </div>
-        <div className='flex flex-row w-screen'>
-          <div className='flex flex-col ml-20 h-7/12 w-7/12 mt-4 border rounded-lg overflow-y-auto'>
-            <div className='h-full w-96 mx-auto mt-8'>
+
+          <div className='flex flex-col ml-20 h-7/12 w-7/12 mt-4 rounded-lg overflow-y-auto border'>
+            <div className='h-full w-full mx-auto mt-8'>
               <Swiper
                 spaceBetween={10}
                 slidesPerView={1}
@@ -109,11 +109,13 @@ export default function profile() {
                 </SwiperSlide>
               </Swiper>
             </div>
-            <div className='w-6/12 border mx-auto'>
+            <div className='w-104 mx-auto border'>
               <div className='flex flex-row'>
-                <h1 className='my-2 text-[#7D7D7D]'>
-                  Educations:
-                </h1>
+                <div>
+                  <h1 className='my-2 text-[#7D7D7D]'>
+                    Educations:
+                  </h1>
+                </div>
                 <p className='my-2 ml-2'>
                   {fakeData.education}
                 </p>
@@ -136,7 +138,7 @@ export default function profile() {
               </div>
             </div>
           </div>
-        </div>
+
       </div>
     </div>
   )
