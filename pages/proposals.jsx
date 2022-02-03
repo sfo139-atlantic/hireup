@@ -20,6 +20,7 @@ const Proposal = ({ user }) => {
   useEffect(() => {
     axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
       .then((results) => {
+        console.log(results.data)
         setAllProposal(results.data[0].proposals)
       })
       .catch((err) => {

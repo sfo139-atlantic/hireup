@@ -23,6 +23,7 @@ export default function ProposalForm(props) {
       'timezone' : setTimezones,
       'portfolio' : setPortfolio,
       'skills' : setSkills,
+      'location': setLocation
     }
     typeToSetState[type](value)
   }
