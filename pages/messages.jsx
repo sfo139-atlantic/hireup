@@ -13,7 +13,7 @@ const MessagesList = () =>{
   // const router = useRouter();
   // const {userid} = router.query;
   const [selected, setSelected] = useState();
-  const [selectedUsername, setSelectedUsername] = useState();
+  const [selectedUserProfile, setSelectedUserProfile] = useState();
   const [allMessages, setAllMessages] = useState();
   const [message, setMessage] = useState();
   const [user] = useAuthState(auth);
@@ -42,33 +42,39 @@ const MessagesList = () =>{
         <div class="text-xl pt-5 pb-1 mb-4 font-bold border-b-2">
           <h1>Messages</h1>
         </div>
-        {allMessages ? allMessages.map(message =>
-        <MessageDetail
-        message={message}
-        uid={user.uid}
-        setSelected={setSelected}
-        setSelectedUsername={setSelectedUsername}
-        setMessage={setMessage}
-        />)
-        :
-        <div>
-          Loading Messages List...
-        </div>}
+        {
+          allMessages
+          ?
+          allMessages.map(message =>
+          <MessageDetail
+          message={message}
+          uid={user.uid}
+          setSelected={setSelected}
+          setSelectedUserProfile={setSelectedUserProfile}
+          setMessage={setMessage}
+          />)
+          :
+          <div>
+            Loading Messages List...
+          </div>
+        }
         </div>
       </div>
     <div class="col-span-3">
-      {user && selected
-      ?
-      <MessageBox
-      userid={user.uid}
-      sendTo={selected}
-      message={message}
-      selectedUsername={selectedUsername}
-      />
-      :
-      <div>
-        Select a message
-      </div>}
+      {
+        user && selected
+        ?
+        <MessageBox
+        userid={user.uid}
+        sendTo={selected}
+        message={message}
+        selectedUserProfile={selectedUserProfile}
+        />
+        :
+        <div>
+          Select a message
+        </div>
+      }
     </div>
   </div>
 

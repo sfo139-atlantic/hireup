@@ -1,12 +1,11 @@
 import {useEffect, useState, useRef} from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { io } from 'socket.io-client';
-const socket = io('http://localhost:3002')
-const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
+const socket = io('http://localhost:3002');
 
-  const [connectionStatus, setConnectionStatus] = useState('')
+const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
   const messageInput = useRef();
-  const [messages, setMessages] = useState(message.messages)
+  const [messages, setMessages] = useState(message.messages);
 
   useEffect(()=>{
     socket.emit('connect-verify-call', 'Checking Connection')
@@ -31,14 +30,15 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
     }
     socket.emit('send-chat-message', messageObj);
     messageInput.current.value = '';
-  }
+  };
+
   return (
     <div className="">
       <div className="relative w-[100%] p-6 overflow-y-auto h-[80vh]">
         {messages.map(message => {return message.user == sendTo ?
         <div className=" flex justify-start flex-col" >
           <div className="pl-1 pt-1 text-xs text-grey">
-            {selectedUsername}
+            {selectedUserProfile.firstName + ' ' + selectedUserProfile.lastName}
             <br/>
           </div>
 
@@ -48,7 +48,7 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
         </div>
         :
         <div className="flex justify-end">
-          <div className="relative max-w-xl text-black bg-white rounded-lg shadow p-1 m-1 w-auto">
+          <div className="relative max-w-xl text-black bg-white rounded-lg shadow p-1 m-1 w-auto transition-all fade-in delay-150 translate-x-full">
             {message.message}
           </div>
         </div>
@@ -66,6 +66,6 @@ const MessageBox = ({sendTo, userid, message, selectedUsername}) => {
       </div>
     </div>
   )
-}
+};
 
-export default MessageBox
+export default MessageBox;
