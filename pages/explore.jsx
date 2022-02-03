@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import BottomBar from '../components/BottomBar';
 import { auth, logout } from "../src/firebase";
 import Navbar from '../components/Navbar';
 import { DropDownMenu } from '../components/DropDownMenu';
@@ -162,6 +162,7 @@ const Explore = () => {
           })}
         </div>
       </div>
+      <BottomBar/>
     </>
   )
 };
