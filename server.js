@@ -18,8 +18,9 @@ app.listen(PORT, () => {
 });
 
 app.get('/profiles', controllers.profiles.get);
-app.post('/createProfile',controllers.profiles.post)
-app.put('/editProfile',controllers.profiles.put)
+app.post('/create',controllers.profiles.post);
+app.put('/update',controllers.profiles.put);
+app.put('/delete', controllers.profiles.delete)
 
 
 
