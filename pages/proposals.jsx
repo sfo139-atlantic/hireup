@@ -11,46 +11,10 @@ import Sidebar from '../components/ProposalSidebar.jsx'
 import Navbar from '../components/Navbar.jsx'
 import React, { useState, useEffect } from 'react'
 
-const fakeProposals = [
-  {
-    id:1,
-    headline: 'HireUp1',
-    overview: 'Bridging the gap between business entrepreneurs and digital product development experts by connect clients and their business ideas to product development specialists through an online marketplace.',
-    skills: ['React Native', 'Project Management'],
-    start: 1603596550705,
-    end: 1643596550705,
-    location: 'San Francisco, CA',
-    timezone: ['Pacific'],
-    budget: '100'
-  },
-  {
-    id:2,
-    headline: 'HireUp2',
-    overview: 'Bridging the gap between business entrepreneurs and digital product development experts by connect clients and their business ideas to product development specialists through an online marketplace.',
-    skills: ['UI Design', 'Project Management'],
-    start: 1643596550705,
-    end: 1643596550705,
-    location: 'Seatle, CA',
-    timezone: ['Pacific'],
-    budget: '100'
-  },
-  {
-    id:3,
-    headline: 'HireUp3',
-    overview: 'Bridging the gap between business entrepreneurs and digital product development experts by connect clients and their business ideas to product development specialists through an online marketplace.',
-    skills: ['React Native', 'Project Management'],
-    start: 1643596550705,
-    end: 1643596550705,
-    location: 'Davis, CA',
-    timezone: ['Pacific'],
-    budget: '100'
-  },
-]
-
 
 const Proposal = ({ user }) => {
   user.uid = "ozrPwHybIkP8zDw3VLEdOWUpGnK2"
-  const [allProposals, setAllProposal] = useState(fakeProposals)
+  const [allProposals, setAllProposal] = useState([])
   const [currProposal, setCurrProposal] = useState({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
 
   useEffect(() => {
