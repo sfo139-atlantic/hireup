@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "../src/firebase";
 import Router from 'next/router'
+import { v4 as uuidv4 } from 'uuid';
 
 
 import ProposalForm from '../components/ProposalForm.jsx'
@@ -48,11 +49,12 @@ const fakeProposals = [
 
 
 const Proposal = ({ user }) => {
+  user.uid = "ozrPwHybIkP8zDw3VLEdOWUpGnK2"
   const [allProposals, setAllProposal] = useState(fakeProposals)
-  const [currProposal, setCurrProposal] = useState({id: "New", headline: "", overview: "", skills: "", timeline: "", location: "", budget: "", timezone:""})
+  const [currProposal, setCurrProposal] = useState({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/profiles/${'ozrPwHybIkP8zDw3VLEdOWUpGnK2'}`)
+    axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
       .then((results) => {
         setAllProposal(results.data[0].proposals)
       })
@@ -62,28 +64,56 @@ const Proposal = ({ user }) => {
   }, []);
 
   const switchProposal = (proposal) => {
-    console.log('switching proposal')
-    // setCurrProposal(proposal)
+    setCurrProposal(proposal)
   }
 
   const updateProposal = (proposal) => {
-    for(let i = 0; i < fakeProposals.length; i++) {
-      if (fakeProposals[i].id === proposal.id) {
-        fakeProposals[i] = proposal
-      }
-    }
+    proposal.start = new Date(proposal.start).getTime()
+    proposal.end = new Date(proposal.end).getTime()
+    proposal.userId = user.uid
+
+    axios.patch('http://localhost:3001/proposal', { proposal })
+      .then(() => {
+        axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
+          .then((results) => {
+            setAllProposal(results.data[0].proposals)
+          })
+      })
   }
+
   const addProposal = (proposal) => {
-    console.log('adding proposal', proposal)
+    if (proposal.id === 'New') {
+      proposal.id = uuidv4();
+    }
+
+    if (!proposal.start) {
+      proposal.start = new Date();
+    }
+
+    if (!proposal.end) {
+      proposal.end = new Date();
+    }
+
+    proposal.start = proposal.start.getTime()
+    proposal.end = proposal.end.getTime()
+    proposal.userId = user.uid
+
+    axios.post('http://localhost:3001/proposal', { proposal })
+      .then(() => {
+        axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
+          .then((results) => {
+            setAllProposal(results.data[0].proposals)
+          })
+      })
   }
 
   return (
-    <div class="grid grid-cols-5 gap-4">
-      <div class="col-span-5 text-center"><Navbar /></div>
-      <div class="row-span-3">
+    <div className="grid grid-cols-5 gap-4">
+      <div className="col-span-5 text-center"><Navbar /></div>
+      <div className="row-span-3">
         <Sidebar currProposal={currProposal} switchProposal={switchProposal} allProposals={allProposals} />
       </div>
-      <div class="col-span-3">
+      <div className="col-span-3">
 
         <ProposalForm currProposal={currProposal} updateProposal={updateProposal} addProposal={addProposal} />
       </div>

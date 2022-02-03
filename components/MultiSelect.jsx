@@ -74,7 +74,7 @@ const options = {
     { value: 'framer x', label: 'Framer X'},
     { value: 'webflow', label: 'Webflow'},
   ],
-  timezone: [
+  timezones: [
     { value: 'Pacific', label: 'Pacific'},
     { value: 'Mountain', label: 'Mountain'},
     { value: 'Central', label: 'Central'},
@@ -88,8 +88,9 @@ export default function CreatableMulti(props) {
     props.handleChange(props.type, value.map(obj => obj.label))
   }
 
-  return (
-    <CreatableSelect
+  if (props.selected) {
+    return (
+      <CreatableSelect
       key={props.id}
       isMulti
       options={options[props.type]}
@@ -101,5 +102,15 @@ export default function CreatableMulti(props) {
         return selectObj
       })}
     />
-  )
+    )
+  } else {
+    return (
+      <CreatableSelect
+      key={props.id}
+      isMulti
+      options={options[props.type]}
+      onChange={(value) => handleChange(value)}
+    />
+    )
+  }
 }

@@ -4,42 +4,40 @@ import React, { useState, useEffect } from 'react'
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "../src/firebase";
 import Router from 'next/router'
+import axios from 'axios';
 
 
-const fakeProfile = {
-  _id: 1,
-  firstName: "Jesse",
-  lastName: "Huang",
-  email: "jayjay@hireup.com",
-  freelancer: {
-      pm: true,
-      designer: false,
-      engineer: true
-  },
-  rate: {
-      "$numberDecimal": "95.5" /// change. Why an object
-  },
-  work_history: "Senior project manager for Atlantic Web Development Agency",
-  skills: ["React", "Full Stack Engineer"],
-  education: "Hack Reactor",
-  location: "HRSF2",
-  portfolio: ["https://youtu.be/qwAKZBMkQgw"],
-  proposals: [{
-      headline: " Project Sushi-Ya",
-      overview: "Irashaimase! I'm an experienced engineer looking to create the world's most efficient salmon nigiri creation algorithm.",
-      timeline: {
-          start: 1643514146,
-          end: 1675050146
-      },
-      location: "Huntington Beach, CA ",
-      timezones: ["pacific", "mountain"]  // need separate timezone for skill for hire
-  }],
-  profile_pic: "https://i.ibb.co/p0fyr4S/jesse.png",
-  timezones: ["Pacific", "Mountain"]
-}
 
 const Skills = ({ user }) => {
-  const [currProfile, setCurrentProfile] = useState(fakeProfile)
+  user.uid = "ozrPwHybIkP8zDw3VLEdOWUpGnK2"
+
+  const [currProfile, setCurrentProfile] = useState({
+    firstName: "",
+    lastName: "",
+    education: "",
+    workHistory: "",
+    rate: "",
+    location: "",
+    timezone: [],
+    portfolio: [],
+    skills: [],
+  })
+
+  useEffect(() => {
+    axios.get(`http://localhost:3001/profiles/${user.uid}`)
+      .then((results) => {
+        setCurrentProfile(results.data[0])
+      })
+      .catch((err) => {
+        throw err
+      })
+  }, []);
+
+  const updateProfile = (skill) => {
+    setCurrentProfile(skill)
+    skill.userId = user.uid
+    axios.patch('http://localhost:3001/skill', { skill })
+  }
 
 
   return (
@@ -48,7 +46,7 @@ const Skills = ({ user }) => {
       <div class="row-span-3">
       </div>
       <div class="col-span-3">
-        <SkillsForm profile={currProfile} />
+        <SkillsForm profile={currProfile} updateProfile={updateProfile}/>
       </div>
     </div>
   )
