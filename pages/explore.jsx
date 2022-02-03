@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useAuthState } from "react-firebase-hooks/auth";
+import Link from 'next/link';
 import { auth, logout } from "../src/firebase";
 import Navbar from '../components/Navbar';
 import { DropDownMenu } from '../components/DropDownMenu';
 import { aLinkGreen } from '../styles/styles.js';
 import { numberWithCommas } from '../src/helperFunctions.js';
 import UserContext from '../src/context.jsx';
+
 
 const exploreContainer = `
   flex
@@ -157,9 +159,13 @@ const Explore = () => {
                 <div className={titleStyling}>
                   {userTitleString}
                 </div>
-                <a className={viewProfile} href="profile" onClick={() => {
-                  setViewProfileID(user._id);
-                }}>View Profile</a>
+                <Link href="/profile">
+                  <a className={viewProfile} onClick={() => {
+                    setViewProfileID(user._id);
+                  }}>
+                    View Profile
+                  </a>
+                </Link>
               </div>
             );
           })}
