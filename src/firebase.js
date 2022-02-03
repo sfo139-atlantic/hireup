@@ -31,7 +31,7 @@ const signInWithGoogle = async (callback) => {
     const { user } = res;
     const q = query(collection(db, 'users'), where('uid', '==', user.uid));
     const docs = await getDocs(q);
-    docs.then(()=> callback(user, null))
+    callback(user, null);
 
     if (docs.docs.length === 0) {
       await addDoc(collection(db, 'users'), {
@@ -49,8 +49,8 @@ const signInWithGoogle = async (callback) => {
 /*-------------SignIn with Email------------- */
 const logInWithEmailAndPassword = async (email, password, callback) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password)
-    .then(data => callback(data, null))
+    const data = await signInWithEmailAndPassword(auth, email, password)
+    callback(data, null)
   } catch (error) {
     callback(null, error.code);
   }
@@ -60,7 +60,8 @@ const logInWithEmailAndPassword = async (email, password, callback) => {
 //*-------------Sign Up------------- */
 const registerWithEmailAndPassword = async (email, password, callback) => {
   try {
-    const res = await createUserWithEmailAndPassword(auth, email, password).then(data => callback(data.user.uid, null))
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+    callback(res.user.uid, null)
     const user = res.user;
     await addDoc(collection(db, "users"), {
       uid: user.uid,
@@ -77,7 +78,8 @@ const registerWithEmailAndPassword = async (email, password, callback) => {
 /*------------- Reset password ------------- */
 const sendPasswordReset = async (email, callback) => {
   try {
-    await sendPasswordResetEmail(auth, email).then(() => callback('Reset password link has been sent to your email!', null))
+    const reset = await sendPasswordResetEmail(auth, email);
+    callback('Reset password link has been sent to your email!', null)
   } catch (err) {
     callback(null, err.code)
   }

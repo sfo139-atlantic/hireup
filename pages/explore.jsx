@@ -17,6 +17,12 @@ const sortAndFilter = `
   flex
   flex-row
 `;
+const resetButton = `
+  px-4 py-1 rounded-xl text- font-semibold text-green border border-green hover:text-white hover:bg-green
+  mt-5
+  w-18
+  h-8
+`;
 const exploreGallery =`
   overflow-auto
   flex
@@ -67,6 +73,10 @@ const titleStyling = `
   flex-wrap
   text-xs
 `;
+const viewProfile = `
+  ${aLinkGreen}
+  pl-24
+  `
 const Explore = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
@@ -77,7 +87,6 @@ const Explore = () => {
     axios.get('http://localhost:3001/profiles')
       .then((results) => {
         let userProfiles = results.data;
-        console.log(userProfiles)
         if (sort === 'Highest to Lowest') {
           userProfiles.sort(({ rate: a }, { rate: b }) => (a > b) ? 1 : -1);
         }
@@ -112,6 +121,16 @@ const Explore = () => {
           <DropDownMenu name={'Specialty'} options={['Production Manager', 'Software Engineer', 'Designer']} clickHandler={setSpecialty} />
           <DropDownMenu name={'Hourly Rate'} options={['Highest to Lowest', 'Lowest to Highest']} clickHandler={setSort} />
           <DropDownMenu name={'Time Zone'} options={['Pacific', 'Mountain', 'Central', 'Eastern', 'Outside of U.S.']} clickHandler={setTimezone} />
+          <button
+            type="button"
+            className={resetButton}
+            onClick={() => {
+              setSpecialty('');
+              setTimezone('');
+              setSort('');
+            }}>
+              Reset
+          </button>
         </div>
         <div className={exploreGallery}>
           {usersData.map((user) => {
@@ -137,7 +156,7 @@ const Explore = () => {
                 <div className={titleStyling}>
                   {userTitleString}
                 </div>
-                <button type="button" className={aLinkGreen}>View Profile</button>
+                <a className={viewProfile} href="profile" >View Profile</a>
               </div>
             );
           })}

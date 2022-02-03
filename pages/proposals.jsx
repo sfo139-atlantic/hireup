@@ -60,12 +60,12 @@ export default function Proposal() {
   }
 
   return (
-    <div class="grid grid-cols-5 gap-4">
-      <div class="col-span-5 text-center"><Navbar /></div>
-      <div class="row-span-3">
+    <div className="grid grid-cols-5 gap-4">
+      <div className="col-span-5 text-center"><Navbar /></div>
+      <div className="row-span-3">
         <Sidebar currProposal={currProposal} switchProposal={switchProposal} allProposals={fakeProposals} />
       </div>
-      <div class="col-span-3">
+      <div className="col-span-3">
 
         <ProposalForm currProposal={currProposal} updateProposal={updateProposal} addProposal={addProposal} />
       </div>
