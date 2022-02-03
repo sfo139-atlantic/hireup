@@ -3,6 +3,7 @@ module.exports = {
   get:async (req, res) => {
     const profiles = await model.get();
     res.send(profiles);
+
   },
 
   post: async (req, res) => {
