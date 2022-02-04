@@ -5,35 +5,16 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "../src/firebase";
 import Navbar from '../components/Navbar';
 import { DropDownMenu } from '../components/DropDownMenu';
-import { aLinkGreen } from '../styles/styles.js';
+import {
+  aLinkGreen,
+  exploreContainer,
+  sortAndFilter,
+  resetButton,
+  exploreGallery,
+} from '../styles/styles.js';
 import { numberWithCommas } from '../src/helperFunctions.js';
 
-const exploreContainer = `
-  flex
-  flex-col
-  justifiy-start
-`;
-const sortAndFilter = `
-  flex
-  flex-row
-`;
-const resetButton = `
-  px-4 py-1 rounded-xl text- font-semibold text-green border border-green hover:text-white hover:bg-green
-  mt-5
-  w-18
-  h-8
-`;
-const exploreGallery =`
-  overflow-auto
-  flex
-  flex-row
-  shrink-0
-  gap-x-16
-  gap-y-8
-  justify-start
-  p-8
-`;
-const profileCard = `
+const proposalCard = `
   flex
   flex-col
   shrink-0
@@ -42,41 +23,38 @@ const profileCard = `
   h-96
   gap-y-1
 `;
-const profiileImageContainer = `
+const proposalImageContainer = `
   object-cover
   w-72
   h-72
 `;
-const profileImage = `
+const proposalImage = `
   shrink-0
   grow-0
   w-full
   h-full
   rounded-md
 `;
-const userDescription = `
+const proposalDescription = `
   pl-1
   w-72
 `;
-const nameStyling = `
-  ${userDescription}
+const proposalNameStyling = `
+  ${proposalDescription}
+  min-h-[1.25rem]
   font-semibold
 `;
-const rateStyling = `
-  ${userDescription}
+const proposalBudgetStyling = `
+  ${proposalDescription}
   text-grey
   text-sm
 `;
-const titleStyling = `
-  ${userDescription}
+const proposalSummary = `
+  ${proposalDescription}
   text-grey
   flex-wrap
   text-xs
 `;
-const viewProfile = `
-  ${aLinkGreen}
-  pl-24
-  `
 const ExploreProposals = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
@@ -100,7 +78,7 @@ const ExploreProposals = () => {
           proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? 1 : -1);
         }
         if (timezone === '') {
-          setUsersData(proposalsData)
+          setUsersData(proposalsData);
         }
         if (timezone !== '') {
           const sortedProfiles = proposalsData.filter(ele => ele.timezones.indexOf(timezone) > -1);
@@ -131,20 +109,19 @@ const ExploreProposals = () => {
         <div className={exploreGallery}>
           {usersData.map((user, index) => {
             return (
-              <div className={profileCard} key={index}>
-                <div className={profiileImageContainer}>
-                  <img className={profileImage} src="profile_placeholder_lightbg.jpeg" />
+              <div className={proposalCard} key={index}>
+                <div className={proposalImageContainer}>
+                  <img className={proposalImage} src="proposal.jpeg" />
                 </div>
-                <div className={nameStyling}>
-                {user.headline }
+                <div className={proposalNameStyling}>
+                {user.headline}
                 </div>
-                <div className={rateStyling}>
+                <div className={proposalBudgetStyling}>
                   Budget:{' $'}{numberWithCommas(user.budget)}
                 </div>
-                <div className={titleStyling}>
+                <div className={proposalSummary}>
                   {user.overview === undefined || user.overview === '' ?'unknown' : user.overview}
                 </div>
-                {/* <a className={viewProfile} href="profile" >View Profile</a> */}
               </div>
             );
           })}
