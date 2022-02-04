@@ -89,16 +89,16 @@ const ExploreProposals = () => {
         const proposalsData = [];
         for (let i = 0; i < data.length; i++) {
           if (data[i].proposals.length) {
-            console.log('data[i]', data[i].proposals)
-            proposalsData = [...proposalsData, ...data[i].proposals];
+            let newProp = data[i].proposals.map(el => el.budget === undefined || el.budget === null ? {...el, budget: "0"} : el);
+            proposalsData = [...proposalsData, ...newProp];
           }
         }
+        console.log(proposalsData);
         if (sort === 'Highest to Lowest') {
-          console.log('proposalsData.budget:', proposalsData);
-          proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? 1 : -1);
+          proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? -1 : 1);
         }
         if (sort === 'Lowest to Highest') {
-          proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? -1 : 1);
+          proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? 1 : -1);
         }
         if (timezone === '') {
           setUsersData(proposalsData)
@@ -140,8 +140,7 @@ const ExploreProposals = () => {
                 {user.headline }
                 </div>
                 <div className={rateStyling}>
-                  {/* Budget:{' $'}{user.budget === undefined || user.budget === "null" || user.budget === "" ? 'unknown' : numberWithCommas(user.budget)} */}
-                  Budget: {user.budget ? ' $' + user.budget : 'unknown' }
+                  Budget:{' $'}{numberWithCommas(user.budget)}
                 </div>
                 <div className={titleStyling}>
                   {user.overview === undefined || user.overview === '' ?'unknown' : user.overview}
