@@ -19,12 +19,8 @@
     "react-icons": "^4.3.1",
     "react-responsive-carousel": "^3.2.22",
     "react-select": "^5.2.2",
-<<<<<<< HEAD
-    "swiper": "^8.0.3"
-=======
     "uuid": "^8.3.2",
     "swiper": "^8.0.2"
->>>>>>> ce30ef3b3c014a05929dac828e669c72b64635ed
   },
   "devDependencies": {
     "@types/node": "17.0.4",

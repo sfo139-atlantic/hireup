@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "../src/firebase";
 import Router from 'next/router'
 import { v4 as uuidv4 } from 'uuid';
+import Loading from '../components/Loading.jsx';
 
 
 import ProposalForm from '../components/ProposalForm.jsx'
@@ -96,7 +97,7 @@ export default function ProposalCheckLogin() {
 
   if (loading) {
     return (
-      <div>Loading</div>
+      <Loading/>
     )
   }
 

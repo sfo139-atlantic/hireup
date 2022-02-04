@@ -9,7 +9,7 @@ const classes = {
 
 const SignUp = () => {
   const [alertPrompt, setAlert] = useState(null);
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [currentuser, setCurrentUser] = useState()
 
   useEffect(()=> {
