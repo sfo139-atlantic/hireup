@@ -13,13 +13,14 @@ import React, { useState, useEffect } from 'react'
 
 
 const Proposal = ({ user }) => {
-  user.uid = "aFtgeYWjjmRn9T9xW6XzH1uP4ci1"
+  user.uid = "Gt3XV1ftMNb9G3mpDpmnVl72QOD3"
   const [allProposals, setAllProposal] = useState([])
   const [currProposal, setCurrProposal] = useState({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
 
   useEffect(() => {
     axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
       .then((results) => {
+        console.log(results.data)
         setAllProposal(results.data[0].proposals)
       })
       .catch((err) => {
@@ -77,6 +78,7 @@ const Proposal = ({ user }) => {
         axios.get(`http://localhost:3001/profiles/${user.uid}`)
           .then((results) => {
             setAllProposal(results.data[0].proposals)
+            setCurrProposal({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
           })
       })
 
@@ -95,6 +97,7 @@ const Proposal = ({ user }) => {
     </div>
   )
 }
+
 
 export default function ProposalCheckLogin() {
   const [user, loading, error] = useAuthState(auth);
