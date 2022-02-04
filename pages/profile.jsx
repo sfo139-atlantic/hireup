@@ -45,6 +45,7 @@ export default function profile() {
   const {viewProfileID, setViewProfileID} = useContext(UserContext);
 
   useEffect(() => {
+    // axios.get('')
     axios.get('http://localhost:3001/profiles/findOne', {params: {
       uid: viewProfileID
     }})
@@ -55,6 +56,22 @@ export default function profile() {
       console.log(err);
     })
   }, []);
+
+  console.log('Logged in User: ', user);
+  console.log('Freelancer: ', userData);
+
+  // handleContactClick (event) {
+  //   event.preventDefault();
+
+  // }
+
+  // Make an axios POST call to /create
+  // in the request body, include the logged in user ID & user email
+    // _id: id
+    // email: email
+  // use conditional rendering
+    // if the user isn't logged in the id should be null
+    // link them back to explore page
 
   return (
     <div>
