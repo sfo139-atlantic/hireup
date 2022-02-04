@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { auth, logInWithEmailAndPassword, signInWithGoogle, sendPasswordReset } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import Navbar from '../components/Navbar.jsx';
+import axios from 'axios';
 
 const classes = {
   input:'block border border-grey-light w-full p-3 rounded mb-4',
@@ -15,10 +16,20 @@ const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user] = useAuthState(auth);
-  const [alertPrompt, setAlert] = useState()
+  const [alertPrompt, setAlert] = useState();
+  const router = useRouter();
 
   useEffect(()=>{
   },[alertPrompt])
+
+  useEffect(()=>{
+    if(user) {
+      console.log('->',user.uid)
+      axios.get(`http://localhost:3001/profiles/findOne?uid=${user.uid}`).then(result => {
+        result.data.length ? router.push('/profile'): axios.post(`http://localhost:3001/create`, { _id:user.uid, email: user.email }).then(()=> router.push('/profile'))
+      })
+    }
+  },[user])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +45,7 @@ const LogIn = () => {
           setAlert('Sorry! You have exceeded the maximum login. Please try again later!')
         }
       } else {
-        window.open('/profile', '_self')
+        router.push('/profile')
       }
     }))
   }
@@ -74,7 +85,7 @@ const LogIn = () => {
 
         <div style={{display: 'flex', justifyContent: 'space-evenly'}}>
           <a href="/signup" className={`${classes.link} text-green`}>Sign Up</a>
-          <p className={classes.link} onClick={()=> window.open('/resetpassword','_self')}>Forgot Password?</p>
+          <p className={classes.link} onClick={()=> router.push('/resetpassword')}>Forgot Password?</p>
         </div>
 
         <button
@@ -83,9 +94,7 @@ const LogIn = () => {
         >Login</button>
 
         <button className={`${classes.button} bg-black`} onClick={() => {
-          signInWithGoogle((res, err) => {
-            window.open('/profile', '_self')
-          })
+          signInWithGoogle()
           }}>
           <span>Login with Google</span>
         </button>

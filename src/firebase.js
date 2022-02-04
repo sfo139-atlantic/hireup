@@ -25,14 +25,12 @@ const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
 /*-------------SignIn with Gmail------------- */
-const signInWithGoogle = async (callback) => {
+const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const { user } = res;
     const q = query(collection(db, 'users'), where('uid', '==', user.uid));
     const docs = await getDocs(q);
-    callback(user, null);
-
     if (docs.docs.length === 0) {
       await addDoc(collection(db, 'users'), {
         uid: user.uid,
@@ -41,7 +39,7 @@ const signInWithGoogle = async (callback) => {
       })
     }
   } catch (err) {
-    callback(null,err.message);
+    throw err
   }
 };
 
@@ -93,7 +91,6 @@ const logout = () => {
 
 export {
   auth,
-  db,
   signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
