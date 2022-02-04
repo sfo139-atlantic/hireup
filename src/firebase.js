@@ -25,14 +25,12 @@ const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
 /*-------------SignIn with Gmail------------- */
-const signInWithGoogle = async (callback) => {
+const signInWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const { user } = res;
     const q = query(collection(db, 'users'), where('uid', '==', user.uid));
     const docs = await getDocs(q);
-    callback(user, null);
-
     if (docs.docs.length === 0) {
       await addDoc(collection(db, 'users'), {
         uid: user.uid,
@@ -41,7 +39,7 @@ const signInWithGoogle = async (callback) => {
       })
     }
   } catch (err) {
-    callback(null,err.message);
+    throw err
   }
 };
 
@@ -61,7 +59,6 @@ const logInWithEmailAndPassword = async (email, password, callback) => {
 const registerWithEmailAndPassword = async (email, password, callback) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    callback(res.user.uid, null)
     const user = res.user;
     await addDoc(collection(db, "users"), {
       uid: user.uid,
@@ -70,7 +67,7 @@ const registerWithEmailAndPassword = async (email, password, callback) => {
     })
   } catch (error) {
     if(error.code === 'auth/email-already-in-use') {
-      callback(null, 'Email has already been used')
+      callback('Email has already been used')
     }
   }
 };
@@ -93,7 +90,6 @@ const logout = () => {
 
 export {
   auth,
-  db,
   signInWithGoogle,
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
