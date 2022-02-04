@@ -80,52 +80,49 @@ const viewProfile = `
 const ExploreProposals = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
-  const [specialty, setSpecialty] = useState('');
   const [sort, setSort] = useState('');
   const [timezone, setTimezone] = useState('');
   useEffect(() => {
     axios.get('http://localhost:3001/profiles')
       .then((results) => {
-        let userProfiles = results.data;
+        let data = results.data;
+        const proposalsData = [];
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].proposals.length) {
+            console.log('data[i]', data[i].proposals)
+            proposalsData = [...proposalsData, ...data[i].proposals];
+          }
+        }
         if (sort === 'Highest to Lowest') {
-          userProfiles.sort(({ rate: a }, { rate: b }) => (a > b) ? 1 : -1);
+          console.log('proposalsData.budget:', proposalsData);
+          proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? 1 : -1);
         }
         if (sort === 'Lowest to Highest') {
-          userProfiles.sort(({ rate: a }, { rate: b }) => (a > b) ? -1 : 1);
+          proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? -1 : 1);
         }
-        if (specialty === '' && timezone === '') {
-          setUsersData(userProfiles)
-        }
-        if (specialty !== '') {
-          const sortedProfiles = userProfiles.filter(ele => ele.freelancer[specialty]);
-          setUsersData(sortedProfiles);
+        if (timezone === '') {
+          setUsersData(proposalsData)
         }
         if (timezone !== '') {
-          const sortedProfiles = userProfiles.filter(ele => ele.timezones.indexOf(timezone) > -1);
-          setUsersData(sortedProfiles);
-        }
-        if (timezone !== '' && specialty !== '') {
-          const sortedProfiles = userProfiles.filter(ele => ele.freelancer[specialty]).filter(ele => ele.timezones.indexOf(timezone) > -1);
+          const sortedProfiles = proposalsData.filter(ele => ele.timezones.indexOf(timezone) > -1);
           setUsersData(sortedProfiles);
         }
       })
       .catch((err) => {
         throw err
       })
-  }, [specialty, sort, timezone]);
+  }, [sort, timezone]);
   return (
     <>
       <Navbar />
       <div className={exploreContainer}>
         <div className={sortAndFilter}>
-          <DropDownMenu name={'Specialty'} options={['Production Manager', 'Software Engineer', 'Designer']} clickHandler={setSpecialty} />
-          <DropDownMenu name={'Hourly Rate'} options={['Highest to Lowest', 'Lowest to Highest']} clickHandler={setSort} />
+          <DropDownMenu name={'Budget'} options={['Highest to Lowest', 'Lowest to Highest']} clickHandler={setSort} />
           <DropDownMenu name={'Time Zone'} options={['Pacific', 'Mountain', 'Central', 'Eastern', 'Outside of U.S.']} clickHandler={setTimezone} />
           <button
             type="button"
             className={resetButton}
             onClick={() => {
-              setSpecialty('');
               setTimezone('');
               setSort('');
             }}>
@@ -133,30 +130,23 @@ const ExploreProposals = () => {
           </button>
         </div>
         <div className={exploreGallery}>
-          {usersData.map((user) => {
-            const titles = Object.entries(user.freelancer);
-            const userTitles = [];
-            for (let i = 0; i < titles.length; i++) {
-              if (titles[i][1]) {
-                userTitles.push(titles[i][0]);
-              }
-            }
-            const userTitleString =userTitles.join(', ');
+          {usersData.map((user, index) => {
             return (
-              <div className={profileCard} key={user._id}>
+              <div className={profileCard} key={index}>
                 <div className={profiileImageContainer}>
-                  <img className={profileImage} src={typeof user.profile_pic === 'string' ? user.profile_pic : "profile_placeholder_lightbg.jpeg"} />
+                  <img className={profileImage} src="profile_placeholder_lightbg.jpeg" />
                 </div>
                 <div className={nameStyling}>
-                {user.firstName}{', '}{user.lastName}
+                {user.headline }
                 </div>
                 <div className={rateStyling}>
-                  Rate/hr:{' $'}{numberWithCommas(user.rate)}
+                  {/* Budget:{' $'}{user.budget === undefined || user.budget === "null" || user.budget === "" ? 'unknown' : numberWithCommas(user.budget)} */}
+                  Budget: {user.budget ? ' $' + user.budget : 'unknown' }
                 </div>
                 <div className={titleStyling}>
-                  {userTitleString}
+                  {user.overview === undefined || user.overview === '' ?'unknown' : user.overview}
                 </div>
-                <a className={viewProfile} href="profile" >View Profile</a>
+                {/* <a className={viewProfile} href="profile" >View Profile</a> */}
               </div>
             );
           })}
