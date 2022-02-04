@@ -13,7 +13,7 @@ app.listen(PORT, () => {
 });
 
 //Get Profiles and Profile information
-app.get('/profiles/:id', controllers.profiles.getById)
+// app.get('/profiles/:id', controllers.profiles.getById);
 
 app.get('/profiles', controllers.profiles.get);
 app.get('/profiles/findOne', controllers.profiles.getOne);
@@ -47,21 +47,19 @@ io.on('connection', socket => {
 
   socket.on('handshake', data => {
     connections[data] = socket.id;
-    console.log(connections)
   });
   socket.on('send-chat-message', message => {
-    console.log(`Sending Message on ${socket.id}`)
-    console.log(message)
+    const parsedMessage = {user: message.sendFrom, time: Date.now(), message: message.message}
     db.messages.updateOne({
       users: {
         $all: [message.sendTo, message.sendFrom]
       }
     }, {
       $push: {
-        messages: {user: message.sendFrom, time: Date.now(), message: message.message}
+        messages: parsedMessage
       }}).catch((e)=>console.log(e))
-    socket.emit('chat-message', message);
-    socket.to(connections[parseInt(message.sendTo)]).emit('chat-message', message);
+    socket.emit('chat-message', parsedMessage);
+    socket.to(connections[parseInt(message.sendTo)]).emit('chat-message', parsedMessage);
   })
 
 });

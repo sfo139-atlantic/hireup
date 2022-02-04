@@ -3,7 +3,7 @@ module.exports = {
   getOne: async (users) => {
     console.log(users)
     try {
-      const messages = await db.messages.find({users: {$all: Object.values(users)}}).toArray();
+      const messages = await db.messages.find({users: {$all: users}}).toArray();
       console.log(`results: ${messages}`)
       return messages;
     } catch (e) {
@@ -28,7 +28,6 @@ module.exports = {
       } else {
         return 'Already exists';
       }
-
     } catch (e) {
       throw e;
     }
