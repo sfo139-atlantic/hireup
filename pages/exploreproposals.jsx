@@ -12,23 +12,36 @@ const exploreContainer = `
   flex
   flex-col
   justifiy-start
+  h-screen
+  w-screen
 `;
 const sortAndFilter = `
   flex
   flex-row
 `;
 const resetButton = `
-  px-4 py-1 rounded-xl text- font-semibold text-green border border-green hover:text-white hover:bg-green
+  px-4
+  py-1
+  rounded-xl
+  font-semibold
+  text-green
+  border
+  border-green
+  hover:text-white
+  hover:bg-green
   mt-5
   w-18
   h-8
 `;
 const exploreGallery =`
-  overflow-auto
+  flex-wrap
+  ml-4
+  w-11/12
+  h-full
   flex
   flex-row
   shrink-0
-  gap-x-16
+  gap-x-32
   gap-y-8
   justify-start
   p-8
@@ -60,6 +73,7 @@ const userDescription = `
 `;
 const nameStyling = `
   ${userDescription}
+  min-h-[1.25rem]
   font-semibold
 `;
 const rateStyling = `
@@ -76,7 +90,7 @@ const titleStyling = `
 const viewProfile = `
   ${aLinkGreen}
   pl-24
-  `
+`;
 const ExploreProposals = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
@@ -100,7 +114,7 @@ const ExploreProposals = () => {
           proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? 1 : -1);
         }
         if (timezone === '') {
-          setUsersData(proposalsData)
+          setUsersData(proposalsData);
         }
         if (timezone !== '') {
           const sortedProfiles = proposalsData.filter(ele => ele.timezones.indexOf(timezone) > -1);
@@ -133,10 +147,10 @@ const ExploreProposals = () => {
             return (
               <div className={profileCard} key={index}>
                 <div className={profiileImageContainer}>
-                  <img className={profileImage} src="profile_placeholder_lightbg.jpeg" />
+                  <img className={profileImage} src="proposal.jpeg" />
                 </div>
                 <div className={nameStyling}>
-                {user.headline }
+                {user.headline}
                 </div>
                 <div className={rateStyling}>
                   Budget:{' $'}{numberWithCommas(user.budget)}
@@ -144,7 +158,6 @@ const ExploreProposals = () => {
                 <div className={titleStyling}>
                   {user.overview === undefined || user.overview === '' ?'unknown' : user.overview}
                 </div>
-                {/* <a className={viewProfile} href="profile" >View Profile</a> */}
               </div>
             );
           })}

@@ -9,7 +9,6 @@ import { aLinkGreen } from '../styles/styles.js';
 import { numberWithCommas } from '../src/helperFunctions.js';
 import UserContext from '../src/context.jsx';
 
-
 const exploreContainer = `
   flex
   flex-col
@@ -22,7 +21,15 @@ const sortAndFilter = `
   flex-row
 `;
 const resetButton = `
-  px-4 py-1 rounded-xl text- font-semibold text-green border border-green hover:text-white hover:bg-green
+  px-4
+  py-1
+  rounded-xl
+  font-semibold
+  text-green
+  border
+  border-green
+  hover:text-white
+  hover:bg-green
   mt-5
   w-18
   h-8
@@ -83,7 +90,7 @@ const titleStyling = `
 const viewProfile = `
   ${aLinkGreen}
   pl-24
-  `
+`;
 const Explore = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
@@ -102,7 +109,7 @@ const Explore = () => {
           userProfiles.sort(({ rate: a }, { rate: b }) => (a < b) ? -1 : 1);
         }
         if (specialty === '' && timezone === '') {
-          setUsersData(userProfiles)
+          setUsersData(userProfiles);
         }
         if (specialty !== '') {
           const sortedProfiles = userProfiles.filter(ele => ele.freelancer[specialty]);
