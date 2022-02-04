@@ -19,7 +19,7 @@ const MessagesList = () =>{
   const [user] = useAuthState(auth);
   console.log(allMessages)
 
-  useEffect(async ()=> {
+  useEffect(()=> {
     if(!user){
       return;
     }

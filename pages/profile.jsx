@@ -1,31 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
-import UserContext from '../src/context.jsx';
-
+import Link from 'next/link'
 import axios from 'axios';
-import Navbar from '../components/Navbar.jsx'
-import { auth, logout } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
+import UserContext from '../src/context.jsx';
+import Navbar from '../components/Navbar.jsx'
+import { auth, logout } from "../src/firebase";
+
 const fakeData = {
-  _id:1,
-  firstName:"Jesse",
-  lastName:"Huang",
-  email:"jayjay@hireup.com",
-  freelancer:{pm:true,designer:false,engineer:true},
-  rate:{"$numberDecimal":"95.5"},
-  work_history:"Senior project manager for Atlantic Web Development Agency",
-  skills:"An experienced project manager and full stack engineer",education:"Hack Reactor",
-  location:"HRSF2",
-  portfolio:["https://source.unsplash.com/WLUHO9A_xik/1600x900", "https://source.unsplash.com/WLUHO9A_xik/1600x900", "https://source.unsplash.com/WLUHO9A_xik/1600x900"],
-  proposals:[
-    {headline:" Project Sushi-Ya",
-  overview:"Irashaimase! I'm an experienced engineer looking to create the world's most efficient salmon nigiri creation algorithm.",
-  timeline:{start:1643514146, end:1675050146},
-  location:"Huntington Beach, CA ",
-  timezones:["pacific","mountain"]}],
-  profile_pic:"https://i.ibb.co/p0fyr4S/jesse.png"
+  portfolio:["https://source.unsplash.com/WLUHO9A_xik/1600x900", "https://source.unsplash.com/WLUHO9A_xik/1600x900", "https://source.unsplash.com/WLUHO9A_xik/1600x900"]
 }
 
 const nameOfUserIcon = <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>;
@@ -45,6 +30,7 @@ export default function profile() {
   const {viewProfileID, setViewProfileID} = useContext(UserContext);
 
   useEffect(() => {
+    console.log(`Searching database for ${viewProfileID}`);
     axios.get('http://localhost:3001/profiles/findOne', {params: {
       uid: viewProfileID
     }})
@@ -56,16 +42,40 @@ export default function profile() {
     })
   }, []);
 
+  const handleContactClick = (event) => {
+      axios.post('http://localhost:3001/message',
+      {
+        users: [user.uid, userData._id]
+      }
+      )
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  // Make an axios POST call to /create
+  // in the request body, include the logged in user ID & user email
+    // _id: id
+    // email: email
+  // use conditional rendering
+    // if the user isn't logged in the id should be null
+    // link them back to explore page
+
   return (
     <div>
       <Navbar />
       <div className='flex h-full w-128 justify-between'>
-        <div className='flex flex-col h-full w-104 ml-6 mt-6 border-r border-[#7D7D7D] mr-4'>
+        <div className='flex flex-col h-full min-w-[24rem] w-104 ml-6 mt-6 border-r border-[#7D7D7D] mr-4'>
           <div>
             <img className='h-64 w-64 rounded-full mx-auto mt-2' src={typeof userData.profile_pic === 'string' ? userData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
           </div>
-          <div className='flex justify-center'>
-            <button className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-2">Contact</button>
+          <div className="flex justify-center">
+            <Link onClick={handleContactClick} href="/messages">
+              <a className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-2">Contact</a>
+            </Link>
           </div>
           <div className='flex flex-col'>
             <div className='flex flex-row justify-between my-2 ml-8'>
@@ -130,8 +140,8 @@ export default function profile() {
                 <h1 className='my-2 text-[#7D7D7D]'>
                   Description:
                 </h1>
-                {userData.skills?.map((eachSkill) => {
-                  return <p className='my-2 ml-2'>{eachSkill}</p>
+                {userData.skills?.map((eachSkill, idx) => {
+                  return <p className='my-2 ml-2' key={idx}>{eachSkill}</p>
                 })}
               </div>
               <div className='flex justify-between'>
