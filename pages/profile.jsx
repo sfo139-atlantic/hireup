@@ -77,7 +77,7 @@ export default function profile() {
     <div>
       <Navbar />
       <div className='flex h-full w-128 justify-between'>
-        <div className='flex flex-col h-full w-104 ml-6 mt-6 border-r border-[#7D7D7D] mr-4'>
+        <div className='flex flex-col h-full min-w-[24rem] w-104 ml-6 mt-6 border-r border-[#7D7D7D] mr-4'>
           <div>
             <img className='h-64 w-64 rounded-full mx-auto mt-2' src={typeof userData.profile_pic === 'string' ? userData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
           </div>

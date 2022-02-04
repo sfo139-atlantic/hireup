@@ -29,7 +29,7 @@ const Navbar = () => {
   const [user] = useAuthState(auth);
 
   return (
-    <Disclosure as="nav" className="sticky w-screen top-0 left-0 right-0 bg-white border-b border-b-grey">
+    <Disclosure as="nav" className="sticky w-screen top-0 left-0 right-0 bg-white border-b border-b-grey z-50">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
