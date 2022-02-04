@@ -10,7 +10,6 @@ import {
   exploreContainer,
   sortAndFilter,
   resetButton,
-  exploreGallery,
 } from '../styles/styles.js';
 import { numberWithCommas } from '../src/helperFunctions.js';
 import UserContext from '../src/context.jsx';
@@ -59,6 +58,21 @@ const viewProfile = `
   ${aLinkGreen}
   pl-24
 `;
+
+const exploreGallery =`
+  flex-wrap
+  ml-4
+  w-11/12
+  h-full
+  flex
+  flex-row
+  shrink-0
+  gap-x-32
+  gap-y-8
+  justify-start
+  p-8
+`;
+
 const Explore = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);

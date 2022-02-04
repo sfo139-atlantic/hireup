@@ -44,24 +44,11 @@ const resetButton = `
   w-18
   h-8
 `;
-const exploreGallery =`
-  flex-wrap
-  ml-4
-  w-11/12
-  h-full
-  flex
-  flex-row
-  shrink-0
-  gap-x-32
-  gap-y-8
-  justify-start
-  p-8
-`;
+
 export {
   aLinkGreen,
   aLinkGrey,
   exploreContainer,
   sortAndFilter,
   resetButton,
-  exploreGallery,
 };
