@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { auth, registerWithEmailAndPassword } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Navbar from '../components/Navbar.jsx';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const classes = {
   input:"block border border-grey-light w-full p-3 rounded mb-4 outline-none",
@@ -8,11 +11,16 @@ const classes = {
 
 const SignUp = () => {
   const [alertPrompt, setAlert] = useState(null);
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [currentuser, setCurrentUser] = useState()
+  const router = useRouter();
 
   useEffect(()=> {
   },[alertPrompt])
+
+  useEffect(()=>{
+    user && axios.post(`http://localhost:3001/create`, { _id:user.uid, email: user.email }).then(()=> router.push('/profile'))
+  },[user])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,10 +28,8 @@ const SignUp = () => {
     const pass1 = e.target.elements["password"].value;
     const pass2 = e.target.elements["confirm_password"].value;
     if(pass1 === pass2 && pass1.length >= 6) {
-      registerWithEmailAndPassword(email, pass1, ((res, err) => {
-        err ? setAlert(err) : ((res)=>{
-          window.open('/profile', '_self')
-        })()
+      registerWithEmailAndPassword(email, pass1, ((err) => {
+        if(err) setAlert(err)
       }))
     } else if ([pass1, pass2].some(el => el.length < 6)) {
       setAlert('Password should be at least 6 characters')
@@ -33,6 +39,8 @@ const SignUp = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <form className="min-h-screen flex flex-col" onSubmit={handleSubmit}>
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
         <div className="bg-white px-6 py-8 rounded shadow-md w-full">
@@ -77,6 +85,7 @@ const SignUp = () => {
         </div>
       </div>
     </form>
+    </>
   )
 }
 
