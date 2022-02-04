@@ -20,10 +20,11 @@ function classNames(...classes) {
 }
 
 const Navbar = () => {
+  const router = useRouter();
 
   const signOut = () => {
     logout();
-    window.open('/login', '_self')
+    router.push('/login');
   }
 
   const [user] = useAuthState(auth);

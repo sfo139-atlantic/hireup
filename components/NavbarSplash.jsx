@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon, UserIcon } from '@heroicons/react/outline';
 import { auth, logout } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 
@@ -13,10 +14,12 @@ function classNames(...classes) {
 
 const Navbar = () => {
   const [user] = useAuthState(auth);
+  const router = useRouter();
+
 
   const signOut = () => {
     logout();
-    window.open('/login', '_self')
+    router.push('/login');
   }
 
   return (
