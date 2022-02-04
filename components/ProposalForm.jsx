@@ -40,11 +40,12 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
     typeToSetState[type](value)
   }
 
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if (currProposal.id === 'New') {
       addProposal({
-        id: currProposal.id,
+        id: currProposal._id,
         headline,
         overview,
         skills,
@@ -106,7 +107,7 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="overview">
             Skills Required
           </label>
-          <MultiSelect  type="skills" id={currProposal.id} selected={currProposal.skills} handleChange={handleChange}/>
+          <MultiSelect  type="skills" id={currProposal._id} selected={currProposal.skills} handleChange={handleChange}/>
         </div>
 
         <div className="mb-4">
@@ -141,7 +142,7 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
             Timezone Preference
           </label>
-          <MultiSelect  type="timezones" id={currProposal.id} selected={currProposal.timezones} handleChange={handleChange}/>
+          <MultiSelect  type="timezones" id={currProposal._id} selected={currProposal.timezones} handleChange={handleChange}/>
         </div>
 
         <div className="flex items-center justify-between">
@@ -161,6 +162,8 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
           </div>
           }
         </div>
+
+
       </form>
     </div>
   )
