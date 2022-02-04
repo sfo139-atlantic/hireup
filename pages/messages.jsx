@@ -51,6 +51,7 @@ const MessagesList = () =>{
           uid={user.uid}
           setSelected={setSelected}
           setSelectedUserProfile={setSelectedUserProfile}
+          selectedUserProfile={selectedUserProfile}
           setMessage={setMessage}
           />)
           :

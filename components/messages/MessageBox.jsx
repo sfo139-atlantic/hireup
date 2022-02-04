@@ -17,7 +17,7 @@ const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
     }
     socket.emit('handshake', userid);
     socket.on('chat-message', data => {
-      setMessages((prev)=>[...prev, data])
+      setMessages((prev) => [ ...prev, data ])
     })
   }, []);
 

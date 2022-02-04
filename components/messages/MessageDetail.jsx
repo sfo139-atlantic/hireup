@@ -1,14 +1,14 @@
 import {useEffect, useState, useRef} from 'react';
 import axios from 'axios';
 
-const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserProfile, selected}) => {
+const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserProfile, selectedUserProfile}) => {
   const [user, setUser] = useState('');
   const [sendToID, setSendToID] = useState('');
 
-  useEffect(()=>{
+  useEffect(() => {
     message.users.map((id)=> {
       console.log(typeof id)
-      if(id !== uid){
+      if(id !== uid) {
         const sendToProfile = axios.get('http://localhost:3001/profiles/findOne', {
           params: {
             uid: id
@@ -17,7 +17,7 @@ const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserPr
           .then((res)=>{
             setUser(res.data);
             setSendToID(res.data._id);
-          })
+          });
       }
     })
   }, []);
@@ -32,16 +32,18 @@ const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserPr
     <div>
       {user
       ?
-      (message.users.includes(sendToID) ? <p className="text-white border-2 bg-green rounded-lg font-bold p-2" onClick={clickHandler}>
-        {user.firstName + ' ' + user.lastName}
-      </p>
-      :
-      <p className="text-black border-2 bg-white rounded-lg font-bold p-2" onClick={clickHandler}>
-        {user.firstName + ' ' + user.lastName}
-      </p>)
+      (selectedUserProfile && selectedUserProfile.uid === sendToID
+        ?
+        <p className="text-white border-2 bg-green rounded-lg font-bold p-2" onClick={clickHandler}>
+          {user.firstName + ' ' + user.lastName}
+        </p>
+        :
+        <p className="text-black shadow bg-white rounded-lg font-bold p-2 hover:bg-green hover:text-white" onClick={clickHandler}>
+          {user.firstName + ' ' + user.lastName}
+        </p>)
       :
       <p>
-        Loading Username...
+      Loading Username...
       </p>}
     </div>
   )
