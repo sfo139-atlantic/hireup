@@ -25,7 +25,7 @@ const LogIn = () => {
   useEffect(()=>{
     if(user) {
       axios.get(`http://localhost:3001/profiles/findOne?uid=${user.uid}`).then(result => {
-        result.data.length ? router.push('/profile'): axios.post(`http://localhost:3001/create`, { _id:user.uid, email: user.email }).then(()=> router.push('/profile'))
+        result.data ? router.push('/profile'): axios.post(`http://localhost:3001/create`, { _id:user.uid, email: user.email }).then(()=> router.push('/profile'))
       })
     }
   },[user])
