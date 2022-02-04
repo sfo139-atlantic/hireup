@@ -8,17 +8,17 @@ const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
   const [messages, setMessages] = useState(message.messages);
 
   useEffect(()=>{
-    socket.emit('connect-verify-call', 'Checking Connection')
+    socket.emit('connect-verify-call', 'Checking Connection');
     socket.on('connect-verify-response', data => {
       setConnectionStatus(true);
-    })
+    });
     if(!userid){
       return
-    }
+    };
     socket.emit('handshake', userid);
     socket.on('chat-message', data => {
       setMessages((prev) => [ ...prev, data ])
-    })
+    });
   }, []);
 
   const messageSubmitHandler = (e) =>{
@@ -27,7 +27,7 @@ const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
       sendFrom: userid,
       sendTo: sendTo,
       message: messageInput.current.value
-    }
+    };
     socket.emit('send-chat-message', messageObj);
     messageInput.current.value = '';
   };
@@ -41,7 +41,6 @@ const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
             {selectedUserProfile.firstName + ' ' + selectedUserProfile.lastName}
             <br/>
           </div>
-
           <div className="relative max-w-xl text-white bg-green rounded-lg shadow p-1 m-1 w-auto">
             {message.message}
           </div>
@@ -56,7 +55,11 @@ const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
       </div>
       <div className="flex flex-col m-1">
         <form onSubmit={messageSubmitHandler} >
-          <input type='text' ref={messageInput} className=" w-full m-1 shadow focus:outline-none focus:shadow-grey pl-12 bg-gray-200 rounded-full py-3"></input>
+          <input
+            type='text'
+            ref={messageInput}
+            className=" w-full m-1 shadow focus:outline-none focus:shadow-grey pl-12 bg-gray-200 rounded-full py-3">
+          </input>
           <div className="flex justify-end">
             <button className="text-xs text-grey">
               Send
