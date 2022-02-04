@@ -19,8 +19,9 @@
     "react-icons": "^4.3.1",
     "react-responsive-carousel": "^3.2.22",
     "react-select": "^5.2.2",
-    "uuid": "^8.3.2",
-    "swiper": "^8.0.2"
+    "socket.io-client": "^4.4.1",
+    "swiper": "^8.0.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "17.0.4",
