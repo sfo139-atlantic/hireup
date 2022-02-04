@@ -4,7 +4,7 @@ import DatePicker from './ProposalDatePicker.jsx';
 
 
 
-export default function ProposalForm({ currProposal, addProposal, updateProposal }) {
+export default function ProposalForm({ currProposal, addProposal, updateProposal, handleDelete }) {
   const [headline, setHeadline] = useState(currProposal.headline)
   const [overview, setOverview] = useState(currProposal.overview)
   const [skills, setSkills] = useState(currProposal.skills)
@@ -154,7 +154,7 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
           <div className="flex items-start">
             <button className="transition ease-in-out delay-50 bg-transparent border border-red text-red hover:bg-red hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
-            // onClick={(e) => handleDelete(e, currProposal._id)}
+            onClick={(e) => handleDelete(e, currProposal._id)}
             >
               Delete
             </button>

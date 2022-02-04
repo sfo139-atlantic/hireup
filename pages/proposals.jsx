@@ -72,6 +72,20 @@ const Proposal = ({ user }) => {
       })
   }
 
+  const handleDelete = (e, id) => {
+    e.preventDefault()
+    console.log('delete', id)
+    axios.put(`http://localhost:3001/proposal/delete/${user.uid}/${id}`)
+      .then(() => {
+        axios.get(`http://localhost:3001/profiles/${user.uid}`)
+          .then((results) => {
+            setAllProposal(results.data[0].proposals)
+            setCurrProposal({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
+          })
+      })
+
+  }
+
   return (
     <div className="grid grid-cols-5 gap-4">
       <div className="col-span-5 text-center"><Navbar /></div>
@@ -80,11 +94,12 @@ const Proposal = ({ user }) => {
       </div>
       <div className="col-span-3">
 
-        <ProposalForm currProposal={currProposal} updateProposal={updateProposal} addProposal={addProposal} />
+        <ProposalForm currProposal={currProposal} updateProposal={updateProposal} addProposal={addProposal} handleDelete={handleDelete} />
       </div>
     </div>
   )
 }
+
 
 export default function ProposalCheckLogin() {
   const [user, loading, error] = useAuthState(auth);
