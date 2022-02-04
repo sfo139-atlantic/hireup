@@ -23,6 +23,7 @@ app.put('/delete', controllers.profiles.delete)
 //Get messages and message info
 app.get('/message', controllers.messages.getOne);
 app.get('/messages', controllers.messages.getAll);
+app.post('/message', controllers.messages.create)
 
 //WEBSOCKET
 const io = require('socket.io')(3002, {
