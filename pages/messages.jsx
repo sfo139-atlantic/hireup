@@ -1,34 +1,30 @@
-import {useEffect, useState, useRef} from 'react';
+import {useEffect, useState, useRef, useContext} from 'react';
 import { useRouter } from 'next/router'
 import { io } from 'socket.io-client';
+import { auth } from "../src/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 import axios from 'axios';
 import MessageBox from '../components/messages/MessageBox.jsx';
 import MessageDetail from '../components/messages/MessageDetail.jsx';
 import Navbar from '../components/Navbar.jsx';
-import { auth } from "../src/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import UserContext from '../src/context.jsx';
+
 
 const MessagesList = () =>{
-  const [selectedChat, setSelectedChat] = useState(null);
-  // const router = useRouter();
-  // const {userid} = router.query;
   const [selected, setSelected] = useState();
   const [selectedUserProfile, setSelectedUserProfile] = useState();
   const [allMessages, setAllMessages] = useState();
   const [message, setMessage] = useState();
   const [user] = useAuthState(auth);
-  console.log(allMessages)
 
   useEffect(()=> {
     if(!user){
       return;
     }
-    console.log(user.uid)
     axios.get('http://localhost:3001/messages', {
       params: {uid: user.uid}
     })
       .then((response)=> {
-        console.log(response.data);
         setAllMessages(response.data);
       })
   }, [user]);
@@ -71,10 +67,11 @@ const MessagesList = () =>{
         sendTo={selected}
         message={message}
         selectedUserProfile={selectedUserProfile}
+        setMessage={setMessage}
         />
         :
-        <div>
-          Select a message
+        <div className="flex justify-center text-center">
+          Please Select a Chat
         </div>
       }
     </div>

@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react'
-import Link from 'next/link'
+import React, { useState, useEffect, useContext } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
 import UserContext from '../src/context.jsx';
-import Navbar from '../components/Navbar.jsx'
+import Navbar from '../components/Navbar.jsx';
 import { auth, logout } from "../src/firebase";
 
 const fakeData = {
@@ -28,6 +29,7 @@ export default function profile() {
   const [userData, setData] = useState([]);
   const [workEXP, setWork] = useState(fakeData.portfolio);
   const {viewProfileID, setViewProfileID} = useContext(UserContext);
+  const router = useRouter();
 
   useEffect(() => {
     console.log(`Searching database for ${viewProfileID}`);
@@ -43,6 +45,7 @@ export default function profile() {
   }, []);
 
   const handleContactClick = (event) => {
+    console.log(`Create`)
       axios.post('http://localhost:3001/message',
       {
         users: [user.uid, userData._id]
@@ -50,6 +53,8 @@ export default function profile() {
       )
     .then((res) => {
       console.log(res);
+    }).then(()=> {
+      router.push('/messages');
     })
     .catch((err) => {
       console.log(err);
@@ -73,9 +78,7 @@ export default function profile() {
             <img className='h-64 w-64 rounded-full mx-auto mt-2' src={typeof userData.profile_pic === 'string' ? userData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
           </div>
           <div className="flex justify-center">
-            <Link onClick={handleContactClick} href="/messages">
-              <a className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-2">Contact</a>
-            </Link>
+            <a className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-2" onClick={handleContactClick}>Contact</a>
           </div>
           <div className='flex flex-col'>
             <div className='flex flex-row justify-between my-2 ml-8'>

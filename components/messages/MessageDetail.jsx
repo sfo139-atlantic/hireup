@@ -7,7 +7,6 @@ const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserPr
 
   useEffect(() => {
     message.users.map((id)=> {
-      console.log(typeof id)
       if(id !== uid) {
         const sendToProfile = axios.get('http://localhost:3001/profiles/findOne', {
           params: {
@@ -32,13 +31,13 @@ const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserPr
     <div>
       {user
       ?
-      (selectedUserProfile && selectedUserProfile.uid === sendToID
+      (selectedUserProfile && selectedUserProfile._id === sendToID
         ?
-        <p className="text-white border-2 bg-green rounded-lg font-bold p-2" onClick={clickHandler}>
+        <p className="text-white shadow bg-green m-1 rounded-lg font-bold p-2" onClick={clickHandler}>
           {user.firstName + ' ' + user.lastName}
         </p>
         :
-        <p className="text-black shadow bg-white rounded-lg font-bold p-2 hover:bg-green hover:text-white" onClick={clickHandler}>
+        <p className="text-black shadow bg-white m-1 rounded-lg font-bold p-2 hover:bg-green hover:text-white" onClick={clickHandler}>
           {user.firstName + ' ' + user.lastName}
         </p>)
       :

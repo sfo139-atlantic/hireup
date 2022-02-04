@@ -3,9 +3,8 @@ import { useRouter } from 'next/router';
 import { io } from 'socket.io-client';
 const socket = io('http://localhost:3002');
 
-const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
+const MessageBox = ({sendTo, userid, message, setMessage, selectedUserProfile}) => {
   const messageInput = useRef();
-  const [messages, setMessages] = useState(message.messages);
 
   useEffect(()=>{
     socket.emit('connect-verify-call', 'Checking Connection');
@@ -17,8 +16,10 @@ const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
     };
     socket.emit('handshake', userid);
     socket.on('chat-message', data => {
-      setMessages((prev) => [ ...prev, data ])
-    });
+      setMessage((chat)=> {
+        return {...chat, messages: [...chat.messages, data]};
+      });
+    })
   }, []);
 
   const messageSubmitHandler = (e) =>{
@@ -35,7 +36,7 @@ const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
   return (
     <div className="">
       <div className="relative w-[100%] p-6 overflow-y-auto h-[80vh]">
-        {messages.map(message => {return message.user == sendTo ?
+        {message.messages.map(message => {return message.user == sendTo ?
         <div className=" flex justify-start flex-col" >
           <div className="pl-1 pt-1 text-xs text-grey">
             {selectedUserProfile.firstName + ' ' + selectedUserProfile.lastName}
@@ -59,7 +60,8 @@ const MessageBox = ({sendTo, userid, message, selectedUserProfile}) => {
             type='text'
             ref={messageInput}
             className=" w-full m-1 shadow focus:outline-none focus:shadow-grey pl-12 bg-gray-200 rounded-full py-3">
-          </input>
+
+            </input>
           <div className="flex justify-end">
             <button className="text-xs text-grey">
               Send
