@@ -86,7 +86,7 @@ export default function profile() {
             <img className='h-64 w-64 rounded-full mx-auto mt-2' src={typeof userData.profile_pic === 'string' ? userData.profile_pic : "profile_placeholder_lightbg.jpeg"}></img>
           </div>
           <div className="flex justify-center">
-            <a className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-2" onClick={handleContactClick}>Contact</a>
+            <a className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline my-2 cursor-pointer" onClick={handleContactClick}>Contact</a>
           </div>
           <div className='flex flex-col'>
             <div className='flex flex-row justify-between my-2 ml-8'>
