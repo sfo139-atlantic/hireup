@@ -29,7 +29,6 @@ module.exports = {
   },
   getById: async (req, res) => {
     const profiles = await model.getById(req.params.id);
-    console.log(profiles[0].proposals)
     res.send(profiles);
   },
   createProposal: async (req, res) => {
@@ -39,6 +38,10 @@ module.exports = {
   updateProposal: async (req, res) => {
     const proposal = await model.updateProposal(req.body.proposal);
     res.status(201).send()
+  },
+  deleteProposal: async (req, res) => {
+    model.deleteProposal(req.params.userId, req.params.id)
+      .then(result => res.status(200).send())
   },
   updateSkill: async (req, res) => {
     const skill = await model.updateSkill(req.body.skill);
