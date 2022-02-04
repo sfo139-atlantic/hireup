@@ -144,10 +144,22 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
           <MultiSelect  type="timezones" id={currProposal.id} selected={currProposal.timezones} handleChange={handleChange}/>
         </div>
 
-        <div className="flex items-end">
-          <button className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
-            {currProposal.id === "New" ? "Publish" : "Update"}
-          </button>
+        <div className="flex items-center justify-between">
+          <div className="flex items-end">
+            <button className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
+              {currProposal.id === "New" ? "Publish" : "Update"}
+            </button>
+          </div>
+          { currProposal.id === "New" ? null :
+          <div className="flex items-start">
+            <button className="transition ease-in-out delay-50 bg-transparent border border-red text-red hover:bg-red hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+            // onClick={(e) => handleDelete(e, currProposal._id)}
+            >
+              Delete
+            </button>
+          </div>
+          }
         </div>
       </form>
     </div>
