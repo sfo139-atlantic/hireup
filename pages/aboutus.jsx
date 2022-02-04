@@ -19,7 +19,7 @@ const AboutUs = () => {
               Role: Project Manager
             </p>
             <p className={data}>
-              Email:
+              Github: <a className="hover:text-green" href="https://github.com/jjhuang417">https://github.com/jjhuang417</a>
             </p>
           </div>
           <div>
@@ -30,7 +30,7 @@ const AboutUs = () => {
               Role: Project Manager
             </p>
             <p className={data}>
-              Email:
+              Github: <a className="hover:text-green" href="https://github.com/van-hsieh">https://github.com/van-hsieh</a>
             </p>
           </div>
           <div>
@@ -41,7 +41,7 @@ const AboutUs = () => {
               Role: Architecture Owner
             </p>
             <p className={data}>
-              Email:
+              Github: <a className="hover:text-green" href="https://github.com/ericjlie">https://github.com/ericjlie</a>
             </p>
           </div>
           <div>
@@ -52,7 +52,7 @@ const AboutUs = () => {
               Role: Architecture Owner
             </p>
             <p className={data}>
-              Email:
+              Github: <a className="hover:text-green" href="https://github.com/JTVong">https://github.com/JTVong</a>
             </p>
           </div>
           <div>
@@ -63,7 +63,7 @@ const AboutUs = () => {
               Role: Architecture Owner
             </p>
             <p className={data}>
-              Email:
+              Github: <a className="hover:text-green" href="https://github.com/cdeng1111">https://github.com/cdeng1111</a>
             </p>
           </div>
           <div>
@@ -74,7 +74,7 @@ const AboutUs = () => {
               Role: UI Owner
             </p>
             <p className={data}>
-              Email:
+              Github: <a className="hover:text-green" href="https://github.com/justinhungle">https://github.com/justinhungle</a>
             </p>
           </div>
           <div>
@@ -85,7 +85,7 @@ const AboutUs = () => {
               Role: UI Owner
             </p>
             <p className={data}>
-              Email:
+              Github: <a className="hover:text-green" href="https://github.com/bgtdinh">https://github.com/bgtdinh</a>
             </p>
           </div>
         </div>
