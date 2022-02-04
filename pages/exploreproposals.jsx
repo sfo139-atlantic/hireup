@@ -1,21 +1,17 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuthState } from "react-firebase-hooks/auth";
-import Link from 'next/link';
+
 import { auth, logout } from "../src/firebase";
 import Navbar from '../components/Navbar';
 import { DropDownMenu } from '../components/DropDownMenu';
 import { aLinkGreen } from '../styles/styles.js';
 import { numberWithCommas } from '../src/helperFunctions.js';
-import UserContext from '../src/context.jsx';
-
 
 const exploreContainer = `
   flex
   flex-col
   justifiy-start
-  h-screen
-  w-screen
 `;
 const sortAndFilter = `
   flex
@@ -28,14 +24,11 @@ const resetButton = `
   h-8
 `;
 const exploreGallery =`
-  flex-wrap
-  ml-4
-  w-11/12
-  h-full
+  overflow-auto
   flex
   flex-row
   shrink-0
-  gap-x-32
+  gap-x-16
   gap-y-8
   justify-start
   p-8
@@ -84,13 +77,12 @@ const viewProfile = `
   ${aLinkGreen}
   pl-24
   `
-const Explore = () => {
+const ExploreProposals = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
   const [specialty, setSpecialty] = useState('');
   const [sort, setSort] = useState('');
   const [timezone, setTimezone] = useState('');
-  const {viewProfileID, setViewProfileID} = useContext(UserContext);
   useEffect(() => {
     axios.get('http://localhost:3001/profiles')
       .then((results) => {
@@ -164,13 +156,7 @@ const Explore = () => {
                 <div className={titleStyling}>
                   {userTitleString}
                 </div>
-                <Link href="/profile">
-                  <a className={viewProfile} onClick={() => {
-                    setViewProfileID(user._id);
-                  }}>
-                    View Profile
-                  </a>
-                </Link>
+                <a className={viewProfile} href="profile" >View Profile</a>
               </div>
             );
           })}
@@ -180,4 +166,4 @@ const Explore = () => {
   )
 };
 
-export default Explore;
+export default ExploreProposals;

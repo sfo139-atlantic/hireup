@@ -102,7 +102,7 @@ const Navbar = () => {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <Link href="explore">
+                          <Link href="exploreproposals">
                             <a
                               className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
                             >
