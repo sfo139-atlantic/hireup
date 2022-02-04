@@ -51,10 +51,10 @@ export default function profile() {
       uid: viewProfileID
       }})
       .then((res) => {
-      setData(res.data);
+        setData(res.data);
       })
       .catch((err) => {
-      console.log(err);
+        console.log(err);
       })
     }
   }, [user]);
