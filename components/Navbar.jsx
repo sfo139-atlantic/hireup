@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon, MenuIcon, XIcon, UserIcon, ChevronDownIcon } from '@heroicons/react/outline';
+import { BellIcon, MenuIcon, XIcon, UserIcon } from '@heroicons/react/outline';
 import { aLinkGreen, aLinkGrey } from '../styles/styles';
 import { auth, logout } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -76,7 +76,6 @@ const Navbar = () => {
                   <div>
                     <Menu.Button className='inline-flex text-grey hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>
                       Explore
-                      <ChevronDownIcon className='w-5 h-5 text-grey hover:text-green'/>
                     </Menu.Button>
                   </div>
                   <Transition
@@ -115,9 +114,6 @@ const Navbar = () => {
                   </Transition>
                 </Menu>
 
-                <Link href='explore'>
-                  <a className='text-grey hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>Explore</a>
-                </Link>
                 {
                   user === null ?
                   <Link href='login'>
