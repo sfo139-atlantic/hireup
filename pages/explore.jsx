@@ -14,6 +14,8 @@ const exploreContainer = `
   flex
   flex-col
   justifiy-start
+  h-screen
+  w-screen
 `;
 const sortAndFilter = `
   flex
@@ -26,11 +28,14 @@ const resetButton = `
   h-8
 `;
 const exploreGallery =`
-  overflow-auto
+  flex-wrap
+  ml-4
+  w-11/12
+  h-full
   flex
   flex-row
   shrink-0
-  gap-x-16
+  gap-x-32
   gap-y-8
   justify-start
   p-8
