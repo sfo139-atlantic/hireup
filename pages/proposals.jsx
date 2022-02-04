@@ -18,7 +18,7 @@ const Proposal = ({ user }) => {
   const [currProposal, setCurrProposal] = useState({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
+    axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`) //switch to user.uid
       .then((results) => {
         console.log(results.data)
         setAllProposal(results.data[0].proposals)
@@ -39,7 +39,7 @@ const Proposal = ({ user }) => {
 
     axios.patch('http://localhost:3001/proposal', { proposal })
       .then(() => {
-        axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
+        axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`) //switch to user.uid
           .then((results) => {
             setAllProposal(results.data[0].proposals)
           })
@@ -63,7 +63,7 @@ const Proposal = ({ user }) => {
 
     axios.post('http://localhost:3001/proposal', { proposal })
       .then(() => {
-        axios.get(`http://localhost:3001/profiles/${user.uid}`)
+        axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`)
           .then((results) => {
             setAllProposal(results.data[0].proposals)
           })
@@ -75,7 +75,7 @@ const Proposal = ({ user }) => {
     console.log('delete', id)
     axios.put(`http://localhost:3001/proposal/delete/${user.uid}/${id}`)
       .then(() => {
-        axios.get(`http://localhost:3001/profiles/${user.uid}`)
+        axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`)
           .then((results) => {
             setAllProposal(results.data[0].proposals)
             setCurrProposal({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})

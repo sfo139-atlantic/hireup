@@ -24,7 +24,7 @@ const Skills = ({ user }) => {
   })
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/profiles/${user.uid}`)
+    axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`)
       .then((results) => {
         setCurrentProfile(results.data[0])
       })
