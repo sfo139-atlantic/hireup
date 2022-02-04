@@ -4,7 +4,7 @@ import DatePicker from './ProposalDatePicker.jsx';
 
 
 
-export default function ProposalForm({ currProposal, addProposal, updateProposal }) {
+export default function ProposalForm({ currProposal, addProposal, updateProposal, handleDelete }) {
   const [headline, setHeadline] = useState(currProposal.headline)
   const [overview, setOverview] = useState(currProposal.overview)
   const [skills, setSkills] = useState(currProposal.skills)
@@ -40,11 +40,12 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
     typeToSetState[type](value)
   }
 
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if (currProposal.id === 'New') {
       addProposal({
-        id: currProposal.id,
+        id: currProposal._id,
         headline,
         overview,
         skills,
@@ -106,7 +107,7 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="overview">
             Skills Required
           </label>
-          <MultiSelect  type="skills" id={currProposal.id} selected={currProposal.skills} handleChange={handleChange}/>
+          <MultiSelect  type="skills" id={currProposal._id} selected={currProposal.skills} handleChange={handleChange}/>
         </div>
 
         <div className="mb-4">
@@ -141,14 +142,26 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
             Timezone Preference
           </label>
-          <MultiSelect  type="timezones" id={currProposal.id} selected={currProposal.timezones} handleChange={handleChange}/>
+          <MultiSelect  type="timezones" id={currProposal._id} selected={currProposal.timezones} handleChange={handleChange}/>
         </div>
 
-        <div className="flex items-end">
-          <button className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
-            {currProposal.id === "New" ? "Publish" : "Update"}
-          </button>
+
+        <div className="flex items-center justify-between">
+          <div className="flex items-end">
+            <button className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>
+              {currProposal.id === "New" ? "Publish" : "Update"}
+            </button>
+          </div>
+          { currProposal.id === "New" ? null :
+          <div className="flex items-start">
+            <button className="transition ease-in-out delay-50 bg-transparent border border-red text-red hover:bg-red hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={(e) => handleDelete(e, currProposal._id)}>
+              Delete
+            </button>
+          </div>
+          }
         </div>
+
+
       </form>
     </div>
   )
