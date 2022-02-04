@@ -87,7 +87,7 @@ export default function profile() {
                 <div className='text-[#7D7D7D] mr-2'>{summaryOfUserIcon}</div>
                 <div className='text-[#7D7D7D]'>Summary:</div>
               </div>
-              <div className='mr-4 text-right'>{userData.work_history}</div>
+                <div className='mr-4 text-right'>{userData.work_history}</div>
             </div>
           </div>
         </div>
