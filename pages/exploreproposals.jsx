@@ -93,7 +93,6 @@ const ExploreProposals = () => {
             proposalsData = [...proposalsData, ...newProp];
           }
         }
-        console.log(proposalsData);
         if (sort === 'Highest to Lowest') {
           proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? -1 : 1);
         }
