@@ -96,10 +96,10 @@ const Explore = () => {
       .then((results) => {
         let userProfiles = results.data;
         if (sort === 'Highest to Lowest') {
-          userProfiles.sort(({ rate: a }, { rate: b }) => (a > b) ? 1 : -1);
+          userProfiles.sort(({ rate: a }, { rate: b }) => (a < b) ? 1 : -1);
         }
         if (sort === 'Lowest to Highest') {
-          userProfiles.sort(({ rate: a }, { rate: b }) => (a > b) ? -1 : 1);
+          userProfiles.sort(({ rate: a }, { rate: b }) => (a < b) ? -1 : 1);
         }
         if (specialty === '' && timezone === '') {
           setUsersData(userProfiles)
