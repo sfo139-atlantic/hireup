@@ -134,4 +134,18 @@ module.exports = {
       throw e;
     }
   },
+  deleteProposal: async (userId, id) => {
+    try {
+      const proposal = await db.profiles.updateMany(
+        {_id : userId},
+        { $pull: { proposals: { _id: id } } },
+        false,
+        true
+      )
+
+      return proposal
+    } catch {
+      throw e;
+    }
+  }
 }
