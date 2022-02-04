@@ -19,8 +19,9 @@ app.get('/profiles', controllers.profiles.get);
 app.get('/profiles/findOne', controllers.profiles.getOne);
 app.post('/create',controllers.profiles.post);
 app.put('/update',controllers.profiles.put);
-app.put('/delete', controllers.profiles.delete)
+app.put('/delete', controllers.profiles.delete);
 
+app.put('/proposal/delete/:userId/:id', controllers.profiles.deleteProposal)
 app.post('/proposal', controllers.profiles.createProposal)
 app.patch('/proposal', controllers.profiles.updateProposal)
 app.patch('/skill', controllers.profiles.updateSkill)
