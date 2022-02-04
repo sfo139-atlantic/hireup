@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { sendPasswordReset } from '../src/firebase'
 import Navbar from '../components/Navbar.jsx';
+import { useRouter } from 'next/router';
 
 const ResetPassword = () => {
   const [alertPrompt, setAlert] = useState();
+  const router = useRouter();
+
   useEffect(()=>{
   },[alertPrompt])
   const handleSubmit = (e) => {
@@ -12,7 +15,7 @@ const ResetPassword = () => {
 
     sendPasswordReset(email.value, ((res, err) => err ? setAlert('No account associated with this email address') : ((res)=>{
       setAlert('sent');
-      window.open('/redirecttologin', '_self')
+      router.push('/redirecttologin')
     })()))
   }
   return (
