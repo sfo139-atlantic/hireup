@@ -18,7 +18,7 @@ const MessagesList = () =>{
   const [message, setMessage] = useState();
   const [user] = useAuthState(auth);
 
-  useEffect(async ()=> {
+  useEffect(()=> {
     if(!user){
       return;
     }

@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon, UserIcon } from '@heroicons/react/outline';
 import { auth, logout } from "../src/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Link from 'next/link';
 
 
 function classNames(...classes) {
@@ -13,8 +14,13 @@ function classNames(...classes) {
 const Navbar = () => {
   const [user] = useAuthState(auth);
 
+  const signOut = () => {
+    logout();
+    window.open('/login', '_self')
+  }
+
   return (
-    <Disclosure as="nav" className="fixed top-0 left-0 right-0 bg-transparent z-50">
+    <Disclosure as="nav" className="fixed top-0 left-0 right-0 w-screen bg-transparent z-50">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -35,39 +41,83 @@ const Navbar = () => {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                  <a
-                    href='/'
-                    >
+                  <Link href='/'>
+                  <a>
                     <img
                       className='block lg:hidden h-8 w-auto'
                       src="/HireUpLogo.svg"
                       alt="Workflow"
                     />
                   </a>
-                  <a
-                    href='/'
-                    >
+                  </Link>
+                  <Link href='/'>
+                  <a>
                     <img
                       className='hidden lg:block h-8 w-auto'
                       src="/HireUpLogo.svg"
                       alt="Workflow"
                     />
                   </a>
+                  </Link>
                   </div>
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <a key='Explore' href='explore' className='text-white hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>Explore</a>
+              <Menu as="div" className='relative'>
+                  <div>
+                    <Menu.Button className='inline-flex text-white hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>
+                      Explore
+                    </Menu.Button>
+                  </div>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-100"
+                    enterFrom="transform opacity-0 scale-95"
+                    enterTo="transform opacity-100 scale-100"
+                    leave="transition ease-in duration-75"
+                    leaveFrom="transform opacity-100 scale-100"
+                    leaveTo="transform opacity-0 scale-95"
+                  >
+                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link href="explore">
+                            <a
+                              className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
+                            >
+                              Freelancers
+                            </a>
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link href="explore">
+                            <a
+                              className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
+                            >
+                              Proposals
+                            </a>
+                          </Link>
+                        )}
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
                 {
                   user === null ?
-                  <a key='Login' href='login' className='text-white hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>Login</a>
+                  <Link href='login'>
+                  <a className='text-white hover:text-green px-4 py-1 rounded-md text-sm font-semibold font-sans'>Login</a>
+                  </Link>
                   :
                   <></>
                 }
                 {/* Profile dropdown */}
                 {
                 user === null ?
-                <a key="Join" href="signup" className='px-4 py-1 rounded-xl text-sm font-semibold text-green border border-green hover:text-white hover:bg-green'>Join</a>
+                <Link href="signup">
+                  <a className='px-4 py-1 rounded-xl text-sm font-semibold text-green border border-green hover:text-white hover:bg-green'>Join</a>
+                </Link>
                 :
                 <Menu as="div" className="ml-3 relative">
                   <div>
@@ -88,29 +138,53 @@ const Navbar = () => {
                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="profile"
-                            className={classNames(active ? 'bg-green' : '', 'block px-4 py-2 text-sm text-black')}
-                          >
-                            Your Profile
-                          </a>
+                          <Link href="profile">
+                            <a
+                              className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
+                            >
+                              Your Profile
+                            </a>
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link href="proposals">
+                            <a
+                              className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
+                            >
+                              Proposals
+                            </a>
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link href="skills">
+                            <a
+                              className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
+                            >
+                              Edit Skills
+                            </a>
+                          </Link>
+                        )}
+                      </Menu.Item>
+                      <Menu.Item>
+                        {({ active }) => (
+                          <Link href="messages">
+                            <a
+                              className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
+                            >
+                              Messages
+                            </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="messages"
-                            className={classNames(active ? 'bg-green' : '', 'block px-4 py-2 text-sm text-black')}
-                          >
-                            Messages
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            onClick={logout}
-                            className={classNames(active ? 'bg-green' : '', 'block px-4 py-2 text-sm text-black')}
+                            onClick={signOut}
+                            className={classNames(active ? 'bg-green' : '', 'hover:bg-green block px-4 py-2 text-sm text-black')}
                           >
                             Sign out
                           </a>
