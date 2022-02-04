@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 const Skills = ({ user }) => {
-  user.uid = "ozrPwHybIkP8zDw3VLEdOWUpGnK2"
+  user.uid = "Gt3XV1ftMNb9G3mpDpmnVl72QOD3"
 
   const [currProfile, setCurrentProfile] = useState({
     firstName: "",
