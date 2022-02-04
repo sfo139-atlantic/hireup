@@ -1,9 +1,11 @@
-import {useEffect, useState, useRef} from 'react';
+import {useEffect, useState, useRef, useContext} from 'react';
+import UserContext from '../../src/context.jsx';
 import axios from 'axios';
 
 const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserProfile, selectedUserProfile}) => {
   const [user, setUser] = useState('');
   const [sendToID, setSendToID] = useState('');
+  const {viewProfileID} = useContext(UserContext);
 
   useEffect(() => {
     message.users.map((id)=> {
@@ -20,6 +22,13 @@ const MessageDetail = ({message, uid, setSelected, setMessage, setSelectedUserPr
       }
     })
   }, []);
+
+  useEffect(()=>{
+    //Hacky way of doing this, sorry
+    if (sendToID === viewProfileID){
+      clickHandler();
+    }
+  }, [sendToID]);
 
   const clickHandler = () => {
     setSelected(sendToID);

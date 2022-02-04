@@ -16,6 +16,7 @@ const MessagesList = () =>{
   const [allMessages, setAllMessages] = useState();
   const [message, setMessage] = useState();
   const [user] = useAuthState(auth);
+  const {viewProfileID} = useContext(UserContext);
 
   useEffect(()=> {
     if(!user){
