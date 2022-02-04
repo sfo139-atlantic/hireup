@@ -45,7 +45,12 @@ module.exports = {
       'black': '#000000',
       'white': '#FFFFFF',
     },
-    extend: {},
+    extend: {
+      width: {
+        '128': '80rem',
+        '104': '56  rem',
+      }
+    },
   },
   plugins: [],
 }
