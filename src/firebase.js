@@ -59,7 +59,6 @@ const logInWithEmailAndPassword = async (email, password, callback) => {
 const registerWithEmailAndPassword = async (email, password, callback) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    callback(res.user.uid, null)
     const user = res.user;
     await addDoc(collection(db, "users"), {
       uid: user.uid,
@@ -68,7 +67,7 @@ const registerWithEmailAndPassword = async (email, password, callback) => {
     })
   } catch (error) {
     if(error.code === 'auth/email-already-in-use') {
-      callback(null, 'Email has already been used')
+      callback('Email has already been used')
     }
   }
 };
