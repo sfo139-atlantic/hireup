@@ -9,12 +9,12 @@ const AboutUs = () => {
   return(
     <>
       <Navbar/>
-      <div className="p-3 max-w-full h-screen">
+      <div className="m-4 p-4 max-w-full h-screen">
         <div className="max-w-4xl h-full mx-auto px-2 sm:px-6 lg:px-8">
           <div>
-            <h1 className={title}>
+            <h2 className={title}>
               Jesse Huang
-            </h1>
+            </h2>
             <p className={data}>
               Role: Project Manager
             </p>
@@ -23,9 +23,9 @@ const AboutUs = () => {
             </p>
           </div>
           <div>
-            <h1 className={title}>
+            <h2 className={title}>
               Van Hsieh
-            </h1>
+            </h2>
             <p className={data}>
               Role: Project Manager
             </p>
@@ -34,9 +34,9 @@ const AboutUs = () => {
             </p>
           </div>
           <div>
-            <h1 className={title}>
+            <h2 className={title}>
               Eric Lie
-            </h1>
+            </h2>
             <p className={data}>
               Role: Architecture Owner
             </p>
@@ -45,9 +45,9 @@ const AboutUs = () => {
             </p>
           </div>
           <div>
-            <h1 className={title}>
+            <h2 className={title}>
               Jantira Vongampai
-            </h1>
+            </h2>
             <p className={data}>
               Role: Architecture Owner
             </p>
@@ -56,9 +56,9 @@ const AboutUs = () => {
             </p>
           </div>
           <div>
-            <h1 className={title}>
+            <h2 className={title}>
               Chun Deng
-            </h1>
+            </h2>
             <p className={data}>
               Role: Architecture Owner
             </p>
@@ -67,9 +67,9 @@ const AboutUs = () => {
             </p>
           </div>
           <div>
-            <h1 className={title}>
+            <h2 className={title}>
               Justin Le
-            </h1>
+            </h2>
             <p className={data}>
               Role: UI Owner
             </p>
@@ -78,9 +78,9 @@ const AboutUs = () => {
             </p>
           </div>
           <div>
-            <h1 className={title}>
+            <h2 className={title}>
               Brian Dinh
-            </h1>
+            </h2>
             <p className={data}>
               Role: UI Owner
             </p>
