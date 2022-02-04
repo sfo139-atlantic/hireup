@@ -5,48 +5,16 @@ import Link from 'next/link';
 import { auth, logout } from "../src/firebase";
 import Navbar from '../components/Navbar';
 import { DropDownMenu } from '../components/DropDownMenu';
-import { aLinkGreen } from '../styles/styles.js';
+import {
+  aLinkGreen,
+  exploreContainer,
+  sortAndFilter,
+  resetButton,
+  exploreGallery,
+} from '../styles/styles.js';
 import { numberWithCommas } from '../src/helperFunctions.js';
 import UserContext from '../src/context.jsx';
 
-const exploreContainer = `
-  flex
-  flex-col
-  justifiy-start
-  h-screen
-  w-screen
-`;
-const sortAndFilter = `
-  flex
-  flex-row
-`;
-const resetButton = `
-  px-4
-  py-1
-  rounded-xl
-  font-semibold
-  text-green
-  border
-  border-green
-  hover:text-white
-  hover:bg-green
-  mt-5
-  w-18
-  h-8
-`;
-const exploreGallery =`
-  flex-wrap
-  ml-4
-  w-11/12
-  h-full
-  flex
-  flex-row
-  shrink-0
-  gap-x-32
-  gap-y-8
-  justify-start
-  p-8
-`;
 const profileCard = `
   flex
   flex-col
