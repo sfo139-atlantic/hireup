@@ -5,35 +5,15 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "../src/firebase";
 import Navbar from '../components/Navbar';
 import { DropDownMenu } from '../components/DropDownMenu';
-import { aLinkGreen } from '../styles/styles.js';
+import {
+  aLinkGreen,
+  exploreContainer,
+  sortAndFilter,
+  resetButton,
+} from '../styles/styles.js';
 import { numberWithCommas } from '../src/helperFunctions.js';
 
-const exploreContainer = `
-  flex
-  flex-col
-  justifiy-start
-`;
-const sortAndFilter = `
-  flex
-  flex-row
-`;
-const resetButton = `
-  px-4 py-1 rounded-xl text- font-semibold text-green border border-green hover:text-white hover:bg-green
-  mt-5
-  w-18
-  h-8
-`;
-const exploreGallery =`
-  overflow-auto
-  flex
-  flex-row
-  shrink-0
-  gap-x-16
-  gap-y-8
-  justify-start
-  p-8
-`;
-const profileCard = `
+const proposalCard = `
   flex
   flex-col
   shrink-0
@@ -42,90 +22,98 @@ const profileCard = `
   h-96
   gap-y-1
 `;
-const profiileImageContainer = `
+const proposalImageContainer = `
   object-cover
   w-72
   h-72
 `;
-const profileImage = `
+const proposalImage = `
   shrink-0
   grow-0
   w-full
   h-full
   rounded-md
 `;
-const userDescription = `
+const proposalDescription = `
   pl-1
   w-72
 `;
-const nameStyling = `
-  ${userDescription}
+const proposalNameStyling = `
+  ${proposalDescription}
+  min-h-[1.25rem]
   font-semibold
 `;
-const rateStyling = `
-  ${userDescription}
+const proposalBudgetStyling = `
+  ${proposalDescription}
   text-grey
   text-sm
 `;
-const titleStyling = `
-  ${userDescription}
+const proposalSummary = `
+  ${proposalDescription}
   text-grey
   flex-wrap
   text-xs
 `;
-const viewProfile = `
-  ${aLinkGreen}
-  pl-24
-  `
+
+const exploreGallery =`
+  flex-wrap
+  ml-4
+  w-11/12
+  h-full
+  flex
+  flex-row
+  shrink-0
+  gap-x-32
+  gap-y-8
+  justify-start
+  p-8
+`;
+
 const ExploreProposals = () => {
   const [user, loading, error] = useAuthState(auth);
   const [usersData, setUsersData] = useState([]);
-  const [specialty, setSpecialty] = useState('');
   const [sort, setSort] = useState('');
   const [timezone, setTimezone] = useState('');
   useEffect(() => {
     axios.get('http://localhost:3001/profiles')
       .then((results) => {
-        let userProfiles = results.data;
+        let data = results.data;
+        const proposalsData = [];
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].proposals.length) {
+            let newProp = data[i].proposals.map(el => el.budget === undefined || el.budget === null ? {...el, budget: "0"} : el);
+            proposalsData = [...proposalsData, ...newProp];
+          }
+        }
         if (sort === 'Highest to Lowest') {
-          userProfiles.sort(({ rate: a }, { rate: b }) => (a > b) ? 1 : -1);
+          proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? -1 : 1);
         }
         if (sort === 'Lowest to Highest') {
-          userProfiles.sort(({ rate: a }, { rate: b }) => (a > b) ? -1 : 1);
+          proposalsData.sort(({ budget: a }, { budget: b }) => (a > b) ? 1 : -1);
         }
-        if (specialty === '' && timezone === '') {
-          setUsersData(userProfiles)
-        }
-        if (specialty !== '') {
-          const sortedProfiles = userProfiles.filter(ele => ele.freelancer[specialty]);
-          setUsersData(sortedProfiles);
+        if (timezone === '') {
+          setUsersData(proposalsData);
         }
         if (timezone !== '') {
-          const sortedProfiles = userProfiles.filter(ele => ele.timezones.indexOf(timezone) > -1);
-          setUsersData(sortedProfiles);
-        }
-        if (timezone !== '' && specialty !== '') {
-          const sortedProfiles = userProfiles.filter(ele => ele.freelancer[specialty]).filter(ele => ele.timezones.indexOf(timezone) > -1);
+          const sortedProfiles = proposalsData.filter(ele => ele.timezones.indexOf(timezone) > -1);
           setUsersData(sortedProfiles);
         }
       })
       .catch((err) => {
         throw err
       })
-  }, [specialty, sort, timezone]);
+  }, [sort, timezone]);
   return (
     <>
       <Navbar />
       <div className={exploreContainer}>
         <div className={sortAndFilter}>
-          <DropDownMenu name={'Specialty'} options={['Production Manager', 'Software Engineer', 'Designer']} clickHandler={setSpecialty} />
-          <DropDownMenu name={'Hourly Rate'} options={['Highest to Lowest', 'Lowest to Highest']} clickHandler={setSort} />
+          <DropDownMenu name={'Budget'} options={['Highest to Lowest', 'Lowest to Highest']} clickHandler={setSort} />
           <DropDownMenu name={'Time Zone'} options={['Pacific', 'Mountain', 'Central', 'Eastern', 'Outside of U.S.']} clickHandler={setTimezone} />
           <button
             type="button"
             className={resetButton}
             onClick={() => {
-              setSpecialty('');
               setTimezone('');
               setSort('');
             }}>
@@ -133,30 +121,21 @@ const ExploreProposals = () => {
           </button>
         </div>
         <div className={exploreGallery}>
-          {usersData.map((user) => {
-            const titles = Object.entries(user.freelancer);
-            const userTitles = [];
-            for (let i = 0; i < titles.length; i++) {
-              if (titles[i][1]) {
-                userTitles.push(titles[i][0]);
-              }
-            }
-            const userTitleString =userTitles.join(', ');
+          {usersData.map((user, index) => {
             return (
-              <div className={profileCard} key={user._id}>
-                <div className={profiileImageContainer}>
-                  <img className={profileImage} src={typeof user.profile_pic === 'string' ? user.profile_pic : "profile_placeholder_lightbg.jpeg"} />
+              <div className={proposalCard} key={index}>
+                <div className={proposalImageContainer}>
+                  <img className={proposalImage} src="proposal.jpeg" />
                 </div>
-                <div className={nameStyling}>
-                {user.firstName}{', '}{user.lastName}
+                <div className={proposalNameStyling}>
+                {user.headline}
                 </div>
-                <div className={rateStyling}>
-                  Rate/hr:{' $'}{numberWithCommas(user.rate)}
+                <div className={proposalBudgetStyling}>
+                  Budget:{' $'}{numberWithCommas(user.budget)}
                 </div>
-                <div className={titleStyling}>
-                  {userTitleString}
+                <div className={proposalSummary}>
+                  {user.overview === undefined || user.overview === '' ?'unknown' : user.overview}
                 </div>
-                <a className={viewProfile} href="profile" >View Profile</a>
               </div>
             );
           })}

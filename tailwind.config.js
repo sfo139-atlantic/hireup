@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'jit',
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -23,6 +24,9 @@ module.exports = {
         '"Noto Color Emoji"',
       ],
       serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+      minHeight: {
+        '1': '12px',
+      },
       mono: [
         'ui-monospace',
         'SFMono-Regular',

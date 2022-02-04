@@ -14,13 +14,14 @@ import React, { useState, useEffect } from 'react'
 
 
 const Proposal = ({ user }) => {
-  user.uid = "ozrPwHybIkP8zDw3VLEdOWUpGnK2"
+  user.uid = "Gt3XV1ftMNb9G3mpDpmnVl72QOD3"
   const [allProposals, setAllProposal] = useState([])
   const [currProposal, setCurrProposal] = useState({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
+    axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`) //switch to user.uid
       .then((results) => {
+        console.log(results.data)
         setAllProposal(results.data[0].proposals)
       })
       .catch((err) => {
@@ -39,7 +40,7 @@ const Proposal = ({ user }) => {
 
     axios.patch('http://localhost:3001/proposal', { proposal })
       .then(() => {
-        axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
+        axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`) //switch to user.uid
           .then((results) => {
             setAllProposal(results.data[0].proposals)
           })
@@ -47,9 +48,7 @@ const Proposal = ({ user }) => {
   }
 
   const addProposal = (proposal) => {
-    if (proposal.id === 'New') {
-      proposal.id = uuidv4();
-    }
+    proposal.id = uuidv4();
 
     if (!proposal.start) {
       proposal.start = new Date();
@@ -65,11 +64,25 @@ const Proposal = ({ user }) => {
 
     axios.post('http://localhost:3001/proposal', { proposal })
       .then(() => {
-        axios.get(`http://localhost:3001/profiles/${user.uid}`) //switch to user.uid
+        axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`)
           .then((results) => {
             setAllProposal(results.data[0].proposals)
           })
       })
+  }
+
+  const handleDelete = (e, id) => {
+    e.preventDefault()
+    console.log('delete', id)
+    axios.put(`http://localhost:3001/proposal/delete/${user.uid}/${id}`)
+      .then(() => {
+        axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`)
+          .then((results) => {
+            setAllProposal(results.data[0].proposals)
+            setCurrProposal({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
+          })
+      })
+
   }
 
   return (
@@ -80,11 +93,12 @@ const Proposal = ({ user }) => {
       </div>
       <div className="col-span-3">
 
-        <ProposalForm currProposal={currProposal} updateProposal={updateProposal} addProposal={addProposal} />
+        <ProposalForm currProposal={currProposal} updateProposal={updateProposal} addProposal={addProposal} handleDelete={handleDelete} />
       </div>
     </div>
   )
 }
+
 
 export default function ProposalCheckLogin() {
   const [user, loading, error] = useAuthState(auth);
