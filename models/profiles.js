@@ -10,7 +10,9 @@ module.exports = {
   },
   getOne: async (uid) => {
     try {
+
       const profiles = await db.profiles.find({_id: uid}).toArray();
+      console.log(profiles)
       return profiles;
     } catch(e) {
       throw e;
