@@ -47,11 +47,8 @@ io.on('connection', socket => {
 
   socket.on('handshake', data => {
     connections[data] = socket.id;
-    console.log(connections)
   });
   socket.on('send-chat-message', message => {
-    console.log(`Sending Message on ${socket.id}`)
-    console.log(message)
     const parsedMessage = {user: message.sendFrom, time: Date.now(), message: message.message}
     db.messages.updateOne({
       users: {
