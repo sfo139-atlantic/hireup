@@ -14,7 +14,7 @@ import React, { useState, useEffect } from 'react'
 
 
 const Proposal = ({ user }) => {
-  user.uid = "Gt3XV1ftMNb9G3mpDpmnVl72QOD3"
+  // user.uid = "Gt3XV1ftMNb9G3mpDpmnVl72QOD3"
   const [allProposals, setAllProposal] = useState([])
   const [currProposal, setCurrProposal] = useState({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
 
