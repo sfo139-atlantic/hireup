@@ -15,7 +15,7 @@ export default function ProposalForm({ allProposals, currProposal, switchProposa
             {proposal.headline}
           </div>
         </div>
-        )
+        );
       }
       )}
         <div

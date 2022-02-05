@@ -81,36 +81,36 @@ const options = {
     { value: 'Eastern', label: 'Eastern'},
   ],
   portfolio: []
-}
+};
 
 export default function CreatableMulti(props) {
   const handleChange = (value) => {
-    props.handleChange(props.type, value.map(obj => obj.label))
-  }
+    props.handleChange(props.type, value.map(obj => obj.label));
+  };
 
   if (props.selected) {
     return (
       <CreatableSelect
-      key={props.id}
-      isMulti
-      options={options[props.type]}
-      onChange={(value) => handleChange(value)}
-      defaultValue={props.selected.length === 0 ? null : props.selected.map(select => {
-        const selectObj = {}
-        selectObj.value = select
-        selectObj.label = select
-        return selectObj
-      })}
-    />
-    )
+        key={props.id}
+        isMulti
+        options={options[props.type]}
+        onChange={(value) => handleChange(value)}
+        defaultValue={props.selected.length === 0 ? null : props.selected.map(select => {
+          const selectObj = {};
+          selectObj.value = select;
+          selectObj.label = select;
+          return selectObj;
+        })}
+      />
+    );
   } else {
     return (
       <CreatableSelect
-      key={props.id}
-      isMulti
-      options={options[props.type]}
-      onChange={(value) => handleChange(value)}
-    />
-    )
+        key={props.id}
+        isMulti
+        options={options[props.type]}
+        onChange={(value) => handleChange(value)}
+      />
+    );
   }
-}
+};

@@ -5,26 +5,26 @@ import DatePicker from './ProposalDatePicker.jsx';
 
 
 export default function ProposalForm({ currProposal, addProposal, updateProposal, handleDelete }) {
-  const [headline, setHeadline] = useState(currProposal.headline)
-  const [overview, setOverview] = useState(currProposal.overview)
-  const [skills, setSkills] = useState(currProposal.skills)
-  const [start, setStart] = useState(currProposal.timeline.start)
-  const [end, setEnd] = useState(currProposal.timeline.end)
-  const [location, setLocation] = useState(currProposal.location)
-  const [budget, setBudget] = useState(currProposal.budget)
-  const [timezones, setTimezones] = useState(currProposal.timezones)
+  const [headline, setHeadline] = useState(currProposal.headline);
+  const [overview, setOverview] = useState(currProposal.overview);
+  const [skills, setSkills] = useState(currProposal.skills);
+  const [start, setStart] = useState(currProposal.timeline.start);
+  const [end, setEnd] = useState(currProposal.timeline.end);
+  const [location, setLocation] = useState(currProposal.location);
+  const [budget, setBudget] = useState(currProposal.budget);
+  const [timezones, setTimezones] = useState(currProposal.timezones);
 
 
   useEffect(() => {
-    setHeadline(currProposal.headline)
-    setOverview(currProposal.overview)
-    setSkills(currProposal.skills)
-    setStart(currProposal.timeline.start)
-    setEnd(currProposal.timeline.end)
-    setLocation(currProposal.location)
-    setTimezones(currProposal.timezones)
-    setBudget(currProposal.budget)
-  }, [currProposal])
+    setHeadline(currProposal.headline);
+    setOverview(currProposal.overview);
+    setSkills(currProposal.skills);
+    setStart(currProposal.timeline.start);
+    setEnd(currProposal.timeline.end);
+    setLocation(currProposal.location);
+    setTimezones(currProposal.timezones);
+    setBudget(currProposal.budget);
+  }, [currProposal]);
 
   const handleChange = (type, value) => {
     const typeToSetState = {
@@ -36,13 +36,13 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
       'location' : setLocation,
       'budget' : setBudget,
       'timezones': setTimezones
-    }
-    typeToSetState[type](value)
-  }
+    };
+    typeToSetState[type](value);
+  };
 
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (currProposal.id === 'New') {
       addProposal({
         id: currProposal._id,
@@ -54,7 +54,7 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
         location,
         timezones,
         budget
-      })
+      });
     } else {
       updateProposal({
         id: currProposal._id,
@@ -66,9 +66,9 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
         location,
         timezones,
         budget
-      })
+      });
     }
-  }
+  };
 
 
   return (
@@ -162,9 +162,7 @@ export default function ProposalForm({ currProposal, addProposal, updateProposal
           </div>
           }
         </div>
-
-
       </form>
     </div>
-  )
-}
+  );
+};
