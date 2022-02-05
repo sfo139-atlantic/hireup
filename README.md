@@ -1,5 +1,12 @@
 
 ![Our company logo](https://raw.githubusercontent.com/sfo139-atlantic/hireup/main/public/HireUpLogo.svg)
+![1](https://img.shields.io/badge/%20Technologies%20Used-%20%20Javascript-green)
+![2](https://img.shields.io/badge/%20-Express-blue)
+![3](https://img.shields.io/badge/%20-Node.js-blueviolet)
+![4](https://img.shields.io/badge/%20-MongoDB-red)
+![5](https://img.shields.io/badge/%20-Firebase-6cf)
+![6](https://img.shields.io/badge/%20-React-red)
+
 
 # Contributors
 Jesse Huang [Github](https://github.com/jjhuang417)
