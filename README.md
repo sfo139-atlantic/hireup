@@ -1,5 +1,5 @@
 
-![Our company logo](https://raw.githubusercontent.com/sfo139-atlantic/hireup/main/public/HireUpLogo.svg)
+![1](https://img.shields.io/badge/%20Technologies%20-%20%20Javascript-green)
 ![1](https://img.shields.io/badge/%20Technologies%20Javascript-green)
 ![2](https://img.shields.io/badge/%20-Express-blue)
 ![3](https://img.shields.io/badge/%20-Node.js-blueviolet)
