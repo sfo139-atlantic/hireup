@@ -108,19 +108,20 @@ export default function ProposalForm(props) {
           <label class="block text-gray-700 text-sm font-bold mb-2" for="timezone">
             Timezone Preference
           </label>
-          {props.profile.timezones ? <MultiSelect  type="timezones" id={props.profile._id} selected={props.profile.timezones} handleChange={handleChange}/> : null}
+          {props.profile ? <MultiSelect  type="timezones" id={props.profile._id} selected={props.profile.timezones} handleChange={handleChange}/> : null}
+
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="portfolio">
             Portfolio Images (url)
           </label>
-          {props.profile.portfolio ? <MultiSelect  type="portfolio" id={props.profile._id} selected={props.profile.portfolio} handleChange={handleChange}/> : null}
+          {props.profile ? <MultiSelect  type="portfolio" id={props.profile._id} selected={props.profile.portfolio} handleChange={handleChange}/> : null}
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="skills">
             Skills
           </label>
-          { props.profile.skills ? <MultiSelect  type="skills" id={props.profile._id} selected={props.profile.skills} handleChange={handleChange}/> : null}
+          { props.profile ? <MultiSelect  type="skills" id={props.profile._id} selected={props.profile.skills} handleChange={handleChange}/> : null}
         </div>
         <div className="flex items-end">
           <button className="transition ease-in-out delay-50 bg-transparent border border-green text-green hover:bg-green hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" onClick={handleSubmit}>

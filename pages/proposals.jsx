@@ -14,15 +14,15 @@ import React, { useState, useEffect } from 'react'
 
 
 const Proposal = ({ user }) => {
-  // user.uid = "Gt3XV1ftMNb9G3mpDpmnVl72QOD3"
+  // user.uid = "yiP4TlFogEdrrxL3CMArzbfOQKl2"
   const [allProposals, setAllProposal] = useState([])
   const [currProposal, setCurrProposal] = useState({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`) //switch to user.uid
+    axios.get(`http://localhost:3001/profiles/findOne?uid=${user.uid}`) //switch to user.uid
       .then((results) => {
-        console.log(results.data)
-        setAllProposal(results.data[0].proposals)
+        console.log(results.data.proposals)
+        setAllProposal(results.data.proposals)
       })
       .catch((err) => {
         throw err
@@ -40,9 +40,9 @@ const Proposal = ({ user }) => {
 
     axios.patch('http://localhost:3001/proposal', { proposal })
       .then(() => {
-        axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`) //switch to user.uid
+        axios.get(`http://localhost:3001/profiles/findOne?uid=${user.uid}`) //switch to user.uid
           .then((results) => {
-            setAllProposal(results.data[0].proposals)
+            setAllProposal(results.data.proposals)
           })
       })
   }
@@ -64,9 +64,9 @@ const Proposal = ({ user }) => {
 
     axios.post('http://localhost:3001/proposal', { proposal })
       .then(() => {
-        axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`)
+        axios.get(`http://localhost:3001/profiles/findOne?uid=${user.uid}`)
           .then((results) => {
-            setAllProposal(results.data[0].proposals)
+            setAllProposal(results.data.proposals)
           })
       })
   }
@@ -76,9 +76,9 @@ const Proposal = ({ user }) => {
     console.log('delete', id)
     axios.put(`http://localhost:3001/proposal/delete/${user.uid}/${id}`)
       .then(() => {
-        axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`)
+        axios.get(`http://localhost:3001/profiles/findOne?uid=${user.uid}`)
           .then((results) => {
-            setAllProposal(results.data[0].proposals)
+            setAllProposal(results.data.proposals)
             setCurrProposal({id: "New", headline: "", overview: "", skills: [], timeline: { start: null, end: null}, location: "", budget: "", timezone:[]})
           })
       })

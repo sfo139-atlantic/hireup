@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 const Skills = ({ user }) => {
-  // user.uid = "Gt3XV1ftMNb9G3mpDpmnVl72QOD3"
+  // user.uid = "yiP4TlFogEdrrxL3CMArzbfOQKl2"
 
   const [currProfile, setCurrentProfile] = useState({
     firstName: "",
@@ -24,9 +24,10 @@ const Skills = ({ user }) => {
   })
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/profiles/?uid=${user.uid}`)
+    axios.get(`http://localhost:3001/profiles/findOne?uid=${user.uid}`)
       .then((results) => {
-        setCurrentProfile(results.data[0])
+        setCurrentProfile(results.data)
+        console.log(user.uid)
       })
       .catch((err) => {
         throw err
