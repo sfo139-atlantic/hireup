@@ -3,20 +3,17 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
 export default function ProposalDatePicker(props) {
   const [date, setDate] = useState(new Date(props.date));
 
   useEffect(() => {
-    setDate(props.date)
-  }, [props.date])
+    setDate(props.date);
+  }, [props.date]);
 
   const handleChange = (date) => {
-    setDate(date)
-    props.handleChange(date)
-  }
+    setDate(date);
+    props.handleChange(date);
+  };
 
   return (
     <div class="shadow appearance-none border rounded w-min py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex flex-row items-center" >
@@ -25,6 +22,5 @@ export default function ProposalDatePicker(props) {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
       </svg>
     </div>
-
   );
 };

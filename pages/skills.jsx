@@ -1,16 +1,35 @@
-import SkillsForm from '../components/SkillsForm.jsx'
-import Navbar from '../components/Navbar.jsx'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, logout } from "../src/firebase";
-import Router from 'next/router'
+import Router from 'next/router';
 import axios from 'axios';
 
+import Navbar from '../components/Navbar.jsx';
+import Loading from '../components/Loading.jsx';
+import SkillsForm from '../components/SkillsForm.jsx';
 
+// checks for user login before showing the skills page or re-route users to the login page
+export default function SkillsCheckLogin() {
+  const [user, loading, error] = useAuthState(auth);
 
+  useEffect(() => {
+    if (!loading && !user) {
+      return Router.push('/login')
+    }
+  }, [user, loading]);
+
+  if (loading) {
+    return <Loading/>;
+  }
+
+  if (user) {
+    return <Skills user={ user } />;
+  }
+};
+
+// Parent component to all related to proposals
+// manages all the proposals related to the user and which proposal to show
 const Skills = ({ user }) => {
-  // user.uid = "yiP4TlFogEdrrxL3CMArzbfOQKl2"
-
   const [currProfile, setCurrentProfile] = useState({
     firstName: "",
     lastName: "",
@@ -21,24 +40,23 @@ const Skills = ({ user }) => {
     timezone: [],
     portfolio: [],
     skills: [],
-  })
+  });
 
   useEffect(() => {
     axios.get(`http://localhost:3001/profiles/findOne?uid=${user.uid}`)
       .then((results) => {
-        setCurrentProfile(results.data)
-        console.log(user.uid)
+        setCurrentProfile(results.data);
       })
       .catch((err) => {
-        throw err
+        throw err;
       })
   }, []);
 
   const updateProfile = (skill) => {
-    setCurrentProfile(skill)
-    skill.userId = user.uid
-    axios.patch('http://localhost:3001/skill', { skill })
-  }
+    setCurrentProfile(skill);
+    skill.userId = user.uid;
+    axios.patch('http://localhost:3001/skill', { skill });
+  };
 
 
   return (
@@ -50,28 +68,5 @@ const Skills = ({ user }) => {
         <SkillsForm profile={currProfile} updateProfile={updateProfile}/>
       </div>
     </div>
-  )
-}
-
-export default function SkillsCheckLogin() {
-  const [user, loading, error] = useAuthState(auth);
-
-  useEffect(() => {
-    if (!loading && !user) {
-      return Router.push('/login')
-    }
-  }, [user, loading])
-
-  if (loading) {
-    return (
-      <div>Loading</div>
-    )
-  }
-
-  if (user) {
-    return <Skills user={user} />
-  } else {
-    return null
-  }
-
-}
+  );
+};
