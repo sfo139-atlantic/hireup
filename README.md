@@ -23,20 +23,15 @@ Justin Le [Github](https://github.com/justinhungle)
 Brian Dinh [Github](https://github.com/bgtdinh)
 
 
-# Introduction
-This project was a brief 1-week sprint where our team tried to complete an MVP for an external user (Jane Doe).
+# About The Project
 
-# Description
-This app helps link together proposals between business owners and freelancers. It displays it in two seperate sections with an explore freelancer section and a explore proposal section. It includes a login with individuals that introduce proposals as well act as freelancers. They are able to fill out proposals and submit them which will show up in exploring proposals. Once a user is signed up they are also created as a freelancer.
+This is an online platform for freelancers and entrepeneurs to partner up and make ideas come true.
 
-### Timeline
-- Setup project infrastructure
-- Send proposal to client
-- Create wireframe and figma designs
-- First round of approval from client
-- Begin feature work
-- User testing with client
-- Clean up and delivery
+![Screen Shot 2022-02-07 at 10 56 31 AM](https://user-images.githubusercontent.com/87162829/152853443-dc9db186-dbe3-4a28-8b6e-e97edbed894f.png)
+
+## Description
+This web app helps link together skills for hire and business proposals between entrepeneurs and freelancers. Users can explore different skills that are availble for hire or business proposals that are recruiting. Freelancers and entrepeneurs login to the site to beging publishing their proposals, skills profile, and live chatting with each other.
+
 
 ## Tech Stack
 - Next.js
@@ -47,9 +42,22 @@ This app helps link together proposals between business owners and freelancers. 
 - Node
 - Firebase
 
-## Expected Technical Challenges
-- Using two new frameworks one being Next.js the other TailwindCSS
-- Authentication
 
-## Unexpected Technical Challenges
+# Getting Started
+
+1. Clone or fork the repo and install dependencies
+```
+npm install
+```
+2. Connect to a backend authentication such as Firebase
+3. Connect to a backend database such as MongoDB
+
+3. Bundle and build
+```
+npm run build
+```
+4. Serve website
+```
+npm run dev
+```
 
